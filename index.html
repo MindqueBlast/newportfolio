@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>AADITYA SAHU | Technologist Portfolio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed-variant": "#5a5c5c",
+            "error-dim": "#bb5551",
+            "on-secondary-fixed-variant": "#006286",
+            "tertiary-fixed-dim": "#c1d0e6",
+            "primary-fixed": "#e2e2e2",
+            "surface-container-highest": "#252626",
+            "on-primary": "#3f4041",
+            "surface-container": "#191a1a",
+            "surface-tint": "#c6c6c7",
+            "outline": "#767575",
+            "on-error": "#490106",
+            "secondary-fixed": "#c4e7ff",
+            "on-secondary-fixed": "#00445e",
+            "on-error-container": "#ff9993",
+            "on-tertiary": "#49586b",
+            "on-background": "#e7e5e4",
+            "inverse-surface": "#fcf8f8",
+            "tertiary-container": "#cfdef5",
+            "surface-variant": "#252626",
+            "error-container": "#7f2927",
+            "on-primary-container": "#d0d0d0",
+            "secondary": "#22b1ec",
+            "outline-variant": "#484848",
+            "primary-container": "#454747",
+            "tertiary": "#e0ecff",
+            "secondary-dim": "#05a9e3",
+            "surface-dim": "#0e0e0e",
+            "on-primary-fixed": "#3e4040",
+            "surface-bright": "#2c2c2c",
+            "secondary-fixed-dim": "#a2dcff",
+            "secondary-container": "#004059",
+            "on-tertiary-fixed-variant": "#4a596c",
+            "surface-container-low": "#131313",
+            "tertiary-dim": "#c1d0e6",
+            "on-surface": "#e7e5e4",
+            "background": "#0e0e0e",
+            "on-secondary": "#002b3d",
+            "surface": "#0e0e0e",
+            "primary-fixed-dim": "#d4d4d4",
+            "inverse-on-surface": "#565554",
+            "surface-container-lowest": "#000000",
+            "on-tertiary-fixed": "#2e3d4e",
+            "primary": "#c6c6c7",
+            "tertiary-fixed": "#cfdef5",
+            "on-tertiary-container": "#414f62",
+            "primary-dim": "#b8b9b9",
+            "on-secondary-container": "#63caff",
+            "surface-container-high": "#1f2020",
+            "error": "#ee7d77",
+            "inverse-primary": "#5e5f5f",
+            "on-surface-variant": "#acabaa"
+          },
+          fontFamily: {
+            "headline": ["Space Grotesk"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+            'glow-pulse': 'glowPulse 3s infinite ease-in-out',
+            'float': 'float 6s ease-in-out infinite',
+            'scanline': 'scanline 8s linear infinite',
+            'border-glow': 'borderGlow 4s linear infinite',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            glowPulse: {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(34, 177, 236, 0.1)' },
+              '50%': { boxShadow: '0 0 40px rgba(34, 177, 236, 0.2)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            scanline: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100%)' },
+            },
+            borderGlow: {
+              '0%, 100%': { borderColor: 'rgba(34, 177, 236, 0.1)' },
+              '50%': { borderColor: 'rgba(34, 177, 236, 0.6)' },
+            }
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: #e7e5e4;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Custom Webkit Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #252626;
+      border-radius: 5px;
+      border: 2px solid #0e0e0e;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #484848;
+    }
+
+    /* Text Selection Highlight */
+    ::selection {
+      background: rgba(34, 177, 236, 0.3);
+      color: #ffffff;
+    }
+
+    /* Secret Konami Terminal Overlay */
+    #matrix-terminal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0, 0, 0, 0.95);
+      color: #22b1ec;
+      font-family: monospace;
+      padding: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    #matrix-terminal.active {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Custom Glowing Cursor Elements */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background: #22b1ec;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100000;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: screen;
+    }
+
+    .custom-cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      background: rgba(34, 177, 236, 0.2);
+      border-radius: 50%;
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+
+    .glitch-text {
+      position: relative;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0e0e0e;
+    }
+
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -1px 0 rgba(238, 125, 119, 0.8);
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim 3s infinite linear alternate-reverse;
+    }
+
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: -1px 0 rgba(34, 177, 236, 0.8);
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0% {
+        clip: rect(62px, 9999px, 83px, 0);
+      }
+
+      10% {
+        clip: rect(100px, 9999px, 20px, 0);
+      }
+
+      20% {
+        clip: rect(2px, 9999px, 96px, 0);
+      }
+
+      30% {
+        clip: rect(59px, 9999px, 2px, 0);
+      }
+
+      40% {
+        clip: rect(98px, 9999px, 60px, 0);
+      }
+
+      50% {
+        clip: rect(14px, 9999px, 13px, 0);
+      }
+
+      60% {
+        clip: rect(90px, 9999px, 78px, 0);
+      }
+
+      70% {
+        clip: rect(31px, 9999px, 21px, 0);
+      }
+
+      80% {
+        clip: rect(12px, 9999px, 99px, 0);
+      }
+
+      90% {
+        clip: rect(4px, 9999px, 50px, 0);
+      }
+
+      100% {
+        clip: rect(78px, 9999px, 30px, 0);
+      }
+    }
+
+    .glass-panel {
+      background: rgba(37, 38, 38, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.03;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .lab-grid {
+      background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.02) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .gradient-mesh {
+      background: radial-gradient(at 0% 0%, rgba(34, 177, 236, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(198, 198, 199, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(34, 177, 236, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(198, 198, 199, 0.03) 0px, transparent 50%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-glow:hover {
+      box-shadow: 0 0 30px rgba(34, 177, 236, 0.15);
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(34, 177, 236, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .animated-grid {
+      mask-image: linear-gradient(to bottom, transparent, black, transparent);
+    }
+  </style>
+</head>
+
+<body class="selection:bg-secondary/30 lab-grid md:cursor-none">
+  <!-- Glowing Cursor -->
+  <div id="custom-cursor" class="custom-cursor hidden md:block"></div>
+  <div id="custom-cursor-glow" class="custom-cursor-glow hidden md:block"></div>
+
+  <!-- Background Particle Network -->
+  <canvas id="bg-canvas" class="fixed inset-0 z-[-1] pointer-events-none opacity-60"></canvas>
+
+  <!-- Matrix Easter Egg Overlay -->
+  <div id="matrix-terminal">
+    <div id="matrix-content" class="font-bold text-lg leading-loose"></div>
+  </div>
+
+  <div class="noise-overlay"></div>
+  <!-- Animated Background Particles -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-20">
+    <div class="particle w-1 h-1 top-[10%] left-[20%] animate-float" style="animation-delay: 0s;"></div>
+    <div class="particle w-2 h-2 top-[40%] left-[80%] animate-float" style="animation-delay: 2s;"></div>
+    <div class="particle w-1 h-1 top-[70%] left-[10%] animate-float" style="animation-delay: 4s;"></div>
+    <div class="particle w-1.5 h-1.5 top-[90%] left-[50%] animate-float" style="animation-delay: 1s;"></div>
+  </div>
+  <nav class="fixed top-0 w-full z-50 bg-[#0e0e0e]/60 backdrop-blur-xl border-b border-outline-variant/5">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-5 md:px-8 h-20">
+      <div
+        class="text-xl font-bold tracking-tighter text-[#c6c6c7] hover:text-secondary transition-all cursor-default group flex items-center gap-2">
+        <span class="w-2 h-2 bg-secondary rounded-full hidden group-hover:block animate-pulse"></span>
+        <span class="glitch-text" data-text="AADITYA SAHU">AADITYA SAHU</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 md:gap-12 font-['Space_Grotesk'] tracking-tight text-sm uppercase">
+        <a class="text-[#c6c6c7] opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 relative group"
+          href="#projects">
+          Projects
+          <span
+            class="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a class="text-[#c6c6c7] opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 relative group"
+          href="#skills">
+          Skills
+          <span
+            class="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a class="text-[#c6c6c7] opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 relative group"
+          href="#education">
+          Education
+          <span
+            class="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a class="text-[#c6c6c7] opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 relative group"
+          href="#journey">
+          Journey
+          <span
+            class="absolute -bottom-1 left-0 w-0 h-[1px] bg-secondary group-hover:w-full transition-all duration-300"></span>
+        </a>
+      </div>
+      <button
+        class="bg-primary text-on-primary px-6 py-2 font-['Space_Grotesk'] text-xs uppercase tracking-widest font-bold rounded-sm scale-95 active:scale-90 transition-all hover:bg-secondary hover:text-white border border-transparent hover:border-secondary shadow-lg hover:shadow-secondary/20">
+        Connect
+      </button>
+    </div>
+  </nav>
+  <main>
+    <!-- Hero Section -->
+    <section
+      class="relative min-h-screen flex flex-col justify-center px-5 md:px-8 pt-20 overflow-hidden bg-transparent gradient-mesh">
+      <!-- Scanline Effect -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent h-20 w-full animate-scanline pointer-events-none opacity-30">
+      </div>
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center z-10">
+        <div class="lg:col-span-8 animate-fade-in-up">
+          <div
+            class="inline-flex items-center gap-2 mb-8 px-3 py-1 bg-secondary-container/10 border border-secondary/20 rounded-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            <span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">Aaditya Sahu // personal
+              brand // technologist</span>
+          </div>
+          <h1
+            class="font-headline text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-on-surface leading-[0.9] mb-8">
+            Building Systems <br class="hidden md:block" /> That Solve <span class="text-secondary">Real Problems</span>
+            <span class="block text-xl md:text-2xl font-light tracking-widest mt-6 opacity-60 font-body">Personal Works
+              by <span class="text-[#c6c6c7] font-medium">Aaditya Sahu</span></span>
+          </h1>
+          <p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl leading-relaxed mb-10">
+            I’m a high school student interested in technology, data, and complex systems. I like finding messy
+            real-world problems and building tools that make them understandable and solvable.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a class="px-5 md:px-8 py-4 bg-primary text-on-primary font-headline font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-secondary hover:text-white transition-all duration-300 shadow-lg shadow-primary/10 border border-transparent hover:border-secondary"
+              href="#projects">
+              View Project Showcase
+            </a>
+            <a class="px-5 md:px-8 py-4 glass-panel border border-outline-variant/15 text-on-surface font-headline font-bold text-sm uppercase tracking-widest rounded-sm hover:border-secondary/40 transition-all group overflow-hidden relative"
+              href="#vision">
+              <span class="relative z-10">My Vision</span>
+              <div
+                class="absolute inset-0 bg-secondary/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500">
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="lg:col-span-4 relative hidden lg:block animate-fade-in-up" style="animation-delay: 0.2s;">
+          <div
+            class="aspect-square glass-panel border border-outline-variant/20 rounded-sm flex items-center justify-center p-8 overflow-hidden relative group">
+            <div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <img alt="Abstract macro shot of a microchip circuit board"
+              class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDILI5Fqwr2N7rgrs-GMWUjZaDOXWfD5h-mZ0WPUf7zOn4UiB4pofdKR-nafzLTOLivXCC2-3weCiNKyZXFt0rPTLh4_dHAa8E7CxKO148YbfDE0jlyArCv95dBodqi9coa5A1TEtOi7Ervvamj7v7il0DmO-Y1Ho8NpakQdswMVewalIx2UgGVrSSHBnzhaUJdqRL4PYpW8Dbx9JQx4VZ2H4ecrgjfTPmyLQ5R4r5eXWpj642fNlINeGFHE5t5LLslLXHt9mbjZjKv" />
+            <div
+              class="absolute inset-0 border-2 border-transparent group-hover:border-secondary/30 transition-all pointer-events-none animate-border-glow">
+            </div>
+          </div>
+          <div
+            class="absolute -bottom-6 -right-6 w-32 h-32 glass-panel border border-outline-variant/20 flex items-center justify-center animate-glow-pulse group hover:bg-secondary/10 transition-colors">
+            <span
+              class="material-symbols-outlined text-4xl text-secondary group-hover:rotate-12 transition-transform">terminal</span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none">
+      </div>
+    </section>
+    <!-- About Section -->
+    <section class="py-20 md:py-32 bg-transparent relative overflow-hidden" id="vision">
+      <div
+        class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-secondary/5 to-transparent pointer-events-none">
+      </div>
+      <div class="max-w-7xl mx-auto px-5 md:px-8 reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16">
+          <div class="lg:col-span-4">
+            <h2 class="font-headline text-xs uppercase tracking-[0.3em] text-primary-dim mb-4">Laboratory Narrative</h2>
+            <div class="h-[1px] w-12 bg-secondary mb-8 transition-all duration-500 hover:w-24"></div>
+          </div>
+          <div class="lg:col-span-8">
+            <p class="font-body text-3xl md:text-4xl text-on-surface leading-tight font-light mb-12">
+              Driven by <span class="italic font-normal">initiative</span> and the relentless pursuit of <span
+                class="text-secondary font-normal">independent learning</span>.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 font-body text-on-surface-variant leading-relaxed">
+              <p class="hover:text-on-surface transition-colors">
+                I’m drawn to problems that don’t come with clear instructions — ranking systems, machine learning
+                models, analytical tools, and systems that help people reason better with information.
+                <br><br>
+                Instead of waiting to learn these skills in college, I’ve been teaching myself software engineering,
+                data analysis, and AI development by building projects from scratch.
+              </p>
+              <p class="hover:text-on-surface transition-colors">
+                My love of learning started when I was seven, when my dad introduced me to coding. Since then, I’ve
+                developed a passion for exploring and understanding almost anything — from programming and robotics to
+                chess and music. This curiosity carries over into school, where I pursue knowledge in the subjects I
+                love, like astronomy and mathematics, often going beyond the classroom to deepen my understanding.
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- Project Showcase Section -->
+    <section class="py-20 md:py-32 bg-transparent relative" id="projects">
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none overflow-hidden animated-grid">
+        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern height="43.4" id="hexagons" patterntransform="scale(2)" patternunits="userSpaceOnUse" width="50">
+              <path d="M25 0 L50 14.4 L50 43.4 L25 57.8 L0 43.4 L0 14.4 Z" fill="none" stroke="currentColor"
+                stroke-width="1"></path>
+            </pattern>
+          </defs>
+          <rect fill="url(#hexagons)" height="100%" width="100%"></rect>
+        </svg>
+      </div>
+      <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
+        <div class="flex justify-between items-end mb-20 reveal">
+          <div>
+            <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-2">Project Showcase</h2>
+            <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Personal technical builds by
+              Aaditya Sahu</p>
+          </div>
+          <span
+            class="material-symbols-outlined text-secondary text-5xl opacity-40 hover:opacity-100 transition-opacity animate-float">code_blocks</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6" id="projects-container">
+
+        </div>
+      </div>
+    </section>
+    <!-- Technical Skills Section -->
+    <section class="py-20 md:py-32 bg-transparent relative overflow-hidden" id="skills">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10 reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+          <div class="lg:col-span-4">
+            <h2 class="font-headline text-4xl font-bold tracking-tighter mb-4">Technical Toolkit</h2>
+            <p class="font-body text-on-surface-variant">Core competencies across software, data, and specialized
+              hardware systems refined through personal projects.</p>
+          </div>
+          <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8" id="skills-container">
+
+          </div>
+        </div>
+      </div>
+      <div class="absolute left-0 bottom-0 w-64 h-64 bg-secondary/5 blur-[100px] pointer-events-none"></div>
+    </section>
+    <!-- Education Section -->
+    <section class="py-20 md:py-32 bg-transparent relative overflow-hidden" id="education">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10 reveal">
+        <div class="flex items-center gap-4 mb-16">
+          <h2 class="font-headline text-4xl font-bold tracking-tighter">Education</h2>
+          <div class="h-[1px] flex-1 bg-outline-variant/20"></div>
+          <span class="material-symbols-outlined text-secondary text-3xl">school</span>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+          <!-- Academic -->
+          <div
+            class="p-10 glass-panel border border-outline-variant/10 rounded-sm hover:border-secondary/30 transition-all group hover:bg-surface-container-high/40">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+              <div>
+                <span class="font-label text-[10px] uppercase tracking-widest text-secondary mb-2 block">High School
+                  Achievements</span>
+                <h3 class="font-headline text-2xl font-bold">High School Student</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-on-surface font-headline font-bold">Class of 2027</div>
+                <div class="text-on-surface-variant font-label text-[10px] uppercase">Expected Graduation</div>
+              </div>
+            </div>
+
+            <div
+              class="flex items-center gap-4 p-4 bg-surface-container-highest border border-outline-variant/10 rounded-sm mb-6">
+              <div class="w-10 h-10 bg-secondary/10 flex items-center justify-center rounded-sm">
+                <span class="material-symbols-outlined text-secondary">school</span>
+              </div>
+              <div>
+                <div class="text-on-surface font-headline font-bold">Syosset High School</div>
+                <div class="text-on-surface-variant text-xs font-body">Multiple-time Honor Roll Recipient | A+ Grade
+                  Average | AP/DE & Honor Courses Only</div>
+              </div>
+            </div>
+
+            <p class="font-body text-on-surface-variant text-sm leading-relaxed">
+              Currently taking the most rigorous courses available, including all AP and Honor classes.
+              Consistently achieved honor roll status and maintains an A+ grade average.
+              Focused on STEM subjects including Computer Science, Mathematics, and Engineering, while actively pursuing
+              personal coding projects, robotics, and competitive programs to develop technical and problem-solving
+              skills.
+            </p>
+          </div>
+          <!-- Independent/Self-Taught -->
+          <div
+            class="p-10 glass-panel border border-outline-variant/10 rounded-sm hover:border-secondary/30 transition-all group hover:bg-surface-container-high/40">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+              <div>
+                <span class="font-label text-[10px] uppercase tracking-widest text-secondary mb-2 block">Technical
+                  Self-Mastery</span>
+                <h3 class="font-headline text-2xl font-bold">Independent Software Engineering</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-on-surface font-headline font-bold">2017 — Present</div>
+                <div class="text-on-surface-variant font-label text-[10px] uppercase">Ongoing Growth</div>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div
+                class="flex gap-4 p-4 border-l-2 border-secondary/30 bg-secondary/5 rounded-r-sm hover:bg-secondary/10 transition-colors">
+                <span class="material-symbols-outlined text-secondary text-sm">terminal</span>
+                <div>
+                  <div class="text-sm font-headline font-bold">Programming Logic</div>
+                  <div class="text-xs font-body text-on-surface-variant">Self-taught through open-source contribution
+                    and technical whitepapers.</div>
+                </div>
+              </div>
+              <div
+                class="flex gap-4 p-4 border-l-2 border-secondary/30 bg-secondary/5 rounded-r-sm hover:bg-secondary/10 transition-colors">
+                <span class="material-symbols-outlined text-secondary text-sm">storage</span>
+                <div>
+                  <div class="text-sm font-headline font-bold">System Architecture</div>
+                  <div class="text-xs font-body text-on-surface-variant">Mastery of scalable backend infrastructure
+                    through personal experimentation.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Awards & Recognition Section -->
+    <section class="py-20 md:py-32 bg-transparent relative" id="awards">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10 reveal">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+          <div>
+            <h2 class="font-headline text-4xl font-bold tracking-tighter">Awards &amp; Recognition</h2>
+            <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-2">External Validation of
+              Technical Excellence</p>
+          </div>
+          <div class="h-[1px] flex-1 bg-outline-variant/20 mx-8 hidden md:block mb-4"></div>
+          <span
+            class="material-symbols-outlined text-secondary text-4xl animate-glow-pulse rounded-full p-2 border border-secondary/20">emoji_events</span>
+        </div>
+
+        <!-- Awards Filter Toolbar -->
+        <div class="flex flex-wrap gap-3 mb-10 w-full md:justify-end" id="awards-filters">
+          <button onclick="filterAwards('All')"
+            class="award-filter-btn active px-5 py-2 rounded-full font-label text-xs uppercase tracking-widest border transition-all duration-300 bg-secondary text-primary border-secondary">All</button>
+          <button onclick="filterAwards('Computer Science')"
+            class="award-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-widest border transition-all duration-300 bg-transparent text-on-surface-variant border-outline-variant/30 hover:border-secondary/50 hover:text-secondary">Computer
+            Science</button>
+          <button onclick="filterAwards('Math')"
+            class="award-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-widest border transition-all duration-300 bg-transparent text-on-surface-variant border-outline-variant/30 hover:border-secondary/50 hover:text-secondary">Math</button>
+          <button onclick="filterAwards('Science')"
+            class="award-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-widest border transition-all duration-300 bg-transparent text-on-surface-variant border-outline-variant/30 hover:border-secondary/50 hover:text-secondary">Science</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="awards-container">
+        </div>
+      </div>
+    </section>
+    <!-- Journey / Timeline Section -->
+    <section class="py-32 bg-transparent relative" id="journey">
+      <div class="max-w-7xl mx-auto px-8 relative z-10">
+        <div class="text-center mb-20 reveal">
+          <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter">My Journey</h2>
+          <p class="font-body text-on-surface-variant mt-4">Charting my Evolution</p>
+        </div>
+        <div class="relative max-w-4xl mx-auto" id="timeline-container">
+
+        </div>
+      </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="py-32 bg-transparent relative overflow-hidden" id="contact">
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary/5 to-transparent"></div>
+      <div class="max-w-3xl mx-auto px-8 text-center relative z-10 reveal">
+        <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-8">Interested in building <br /> the
+          future together?</h2>
+        <p class="font-body text-on-surface-variant mb-12">I'm always looking for collaborative project opportunities
+          and ambitious engineering challenges. Reach out!</p>
+        <div class="inline-flex flex-col items-center group">
+          <a class="flex items-center gap-4 text-2xl md:text-3xl font-headline font-bold text-on-surface hover:text-secondary transition-all duration-300"
+            href="mailto:aadityasahu26@gmail.com">
+            aadityasahu26@gmail.com
+            <span
+              class="material-symbols-outlined text-secondary group-hover:translate-x-3 transition-transform text-3xl">alternate_email</span>
+          </a>
+          <div class="h-[1px] w-0 group-hover:w-full bg-secondary mt-2 transition-all duration-500"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="w-full py-12 border-t border-[#484848]/15 bg-[#000000] relative z-20">
+    <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-8 gap-6">
+      <div class="font-['Inter'] text-xs tracking-widest uppercase opacity-50 text-[#c6c6c7]">
+        © 2026 Aaditya Sahu. Built for the future.
+      </div>
+      <div class="flex gap-8 font-['Inter'] text-xs tracking-widest uppercase opacity-50 text-[#c6c6c7]">
+        <a class="hover:text-secondary transition-colors hover:opacity-100"
+          href="https://github.com/MindqueBlast">GitHub</a>
+        <a class="hover:text-secondary transition-colors hover:opacity-100"
+          href="https://www.linkedin.com/in/aaditya-sahu-962162245/">LinkedIn</a>
+        <a class="hover:text-secondary transition-colors hover:opacity-100" href="#">Documentation</a>
+      </div>
+      <div class="flex items-center gap-2 opacity-50 group cursor-default">
+        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        <span
+          class="font-['Inter'] text-[10px] tracking-widest uppercase text-[#c6c6c7] group-hover:opacity-100 transition-opacity">System_Status_Active</span>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+  <!-- Project Modal Overlay -->
+  <div id="project-modal"
+    class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+    <div id="project-modal-backdrop"
+      class="absolute inset-0 bg-surface/90 backdrop-blur-md cursor-pointer transition-opacity"></div>
+
+    <div id="project-modal-content"
+      class="relative z-10 w-11/12 max-w-5xl max-h-[90vh] overflow-y-auto bg-surface border border-outline-variant/30 rounded-lg shadow-2xl scale-95 transition-transform duration-300 delay-75 transform opacity-0">
+
+      <!-- Close Button -->
+      <button id="project-modal-close"
+        class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 flex items-center justify-center bg-surface-container-high rounded-full text-on-surface-variant hover:text-white hover:bg-secondary/20 border border-outline-variant/20 hover:border-secondary/50 transition-all z-20 group">
+        <span
+          class="material-symbols-outlined text-xl group-hover:rotate-90 transition-transform duration-300">close</span>
+      </button>
+
+      <!-- Dynamic Body content injected here by render.js -->
+      <div id="project-modal-body" class="p-6 md:p-10">
+      </div>
+
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="render.js"></script>
+</body>
+
+</html>
