@@ -162,9 +162,9 @@ const portfolioData = {
             type: "Science"
         },
         {
-            badge: "3rd Place",
+            badge: "5th Place",
             title: "Robot Tour - Regional Science Olympiad",
-            description: "Placed third at the regional Science Olympiad competition, showcasing robotics and PID control skills.",
+            description: "Placed fifth at the regional Science Olympiad competition, showcasing robotics and PID control skills.",
             type: "Science"
         },
         {
