@@ -1,6 +1,18 @@
 const portfolioData = {
     projects: [
         {
+            title: "City Crisis Simulation Dashboard",
+            description: "An interactive real-time simulation tool that models how failures propagate through a city’s infrastructure network using graph theory. Users can run different scenarios such as power grid failures, floods, or disease spread and observe how interconnected systems like transport, healthcare, and energy influence cascading effects. Built as a full-stack system with a Python backend simulation engine and a real-time web visualization frontend.",
+            tags: ["Simulation", "Systems", "Real-time"],
+            tech: ["Python", "NetworkX", "FastAPI", "JavaScript", "Canvas", "WebSockets", "HTML/CSS"],
+            linkText: "Live Simulation",
+            link: "#",
+            colSpan: "md:col-span-6 lg:col-span-8",
+            delay: "1.0s",
+            type: "hero-right"
+        },
+
+        {
             title: "Debate Elo Tracker",
             description: "A full-stack MERN application for tracking competitive debate performance in real time. Features dynamic rankings, analytics visualizations, tournament management, and Elo history computation.",
             tags: ["Full-stack", "Data", "Real-time"],
