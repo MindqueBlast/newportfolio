@@ -6,7 +6,7 @@ const portfolioData = {
             tags: ["Simulation", "Systems", "Real-time"],
             tech: ["Python", "NetworkX", "FastAPI", "JavaScript", "Canvas", "WebSockets", "HTML/CSS"],
             linkText: "Live Simulation",
-            link: "#",
+            link: "https://city-crisis-simulator.vercel.app/",
             colSpan: "md:col-span-6 lg:col-span-8",
             delay: "1.0s",
             type: "hero-right"
