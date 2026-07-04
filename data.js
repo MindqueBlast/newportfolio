@@ -31,7 +31,7 @@ const portfolioData = {
             link: "https://city-crisis-simulator.vercel.app/",
             colSpan: "md:col-span-6 lg:col-span-8",
             delay: "1.0s",
-            type: "hero-right"
+            type: "standard"
         },
 
         {
@@ -136,7 +136,7 @@ const portfolioData = {
         {
             category: "AI & Machine Learning",
             icon: "analytics",
-            items: ["PyTorch", "TensorFlow", "ML Pipelines", "Data Modeling", "Agentic Development"],
+            items: ["Opencv", "PyTorch", "TensorFlow", "ML Pipelines", "Data Modeling", "Agentic Development"],
             isSecondary: false
         },
         {
