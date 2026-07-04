@@ -1,6 +1,28 @@
 const portfolioData = {
     projects: [
         {
+            title: "TerraWatch",
+            description: "A full-stack geospatial analytics platform that detects environmental changes using real Sentinel-2 satellite imagery from the Microsoft Planetary Computer. Users can select any region in the world, compare historical and current imagery through NDVI analysis, and visualize vegetation loss or gain. The backend uses asynchronous tile-based processing, intelligent disk caching, and progressive streaming to efficiently analyze large geographic regions while maintaining a responsive user experience.",
+            tags: ["Geospatial", "Satellite Data", "Environmental"],
+            tech: ["Next.js", "React", "FastAPI", "Python", "Leaflet", "Microsoft Planetary Computer", "pystac-client", "odc-stac", "xarray", "SciPy", "diskcache"],
+            linkText: "Live Demo",
+            link: "https://terra-watch-mu.vercel.app",
+            colSpan: "md:col-span-6 lg:col-span-8",
+            delay: "1.1s",
+            type: "hero-right"
+        },
+        {
+            title: "Relativistic Black Hole Ray Tracer",
+            description: "An interactive WebGL simulation that visualizes how light propagates around a Schwarzschild black hole by numerically integrating null geodesics in curved spacetime. The renderer performs real-time GPU ray tracing to simulate gravitational lensing, Einstein rings, gravitational redshift, relativistic Doppler beaming, and accretion disk rendering, while an educational dashboard allows users to explore the underlying physics through interactive controls and real-time visualization.",
+            tags: ["Physics", "Computer Graphics", "Simulation"],
+            tech: ["JavaScript", "Vite", "Three.js", "WebGL", "GLSL", "GPU Shaders"],
+            linkText: "Live Demo",
+            link: "[https://black-hole-raytracer.vercel.app]",
+            colSpan: "md:col-span-6 lg:col-span-8",
+            delay: "1.2s",
+            type: "hero-right"
+        },
+        {
             title: "City Crisis Simulation Dashboard",
             description: "An interactive real-time simulation tool that models how failures propagate through a city’s infrastructure network using graph theory. Users can run different scenarios such as power grid failures, floods, or disease spread and observe how interconnected systems like transport, healthcare, and energy influence cascading effects. Built as a full-stack system with a Python backend simulation engine and a real-time web visualization frontend.",
             tags: ["Simulation", "Systems", "Real-time"],
