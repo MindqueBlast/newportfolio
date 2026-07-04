@@ -8,42 +8,8 @@ const portfolioData = {
             linkText: "Live Demo",
             link: "https://terra-watch-mu.vercel.app",
             colSpan: "md:col-span-6 lg:col-span-8",
-            delay: "1.1s",
-            type: "hero-left"
-        },
-        {
-            title: "Relativistic Black Hole Ray Tracer",
-            description: "An interactive WebGL simulation that visualizes how light propagates around a Schwarzschild black hole by numerically integrating null geodesics in curved spacetime. The renderer performs real-time GPU ray tracing to simulate gravitational lensing, Einstein rings, gravitational redshift, relativistic Doppler beaming, and accretion disk rendering, while an educational dashboard allows users to explore the underlying physics through interactive controls and real-time visualization.",
-            tags: ["Physics", "Computer Graphics", "Simulation"],
-            tech: ["JavaScript", "Vite", "Three.js", "WebGL", "GLSL", "GPU Shaders"],
-            linkText: "Live Demo",
-            link: "[https://black-hole-raytracer.vercel.app]",
-            colSpan: "md:col-span-6 lg:col-span-8",
-            delay: "1.2s",
-            type: "hero-right"
-        },
-        {
-            title: "City Crisis Simulation Dashboard",
-            description: "An interactive real-time simulation tool that models how failures propagate through a city’s infrastructure network using graph theory. Users can run different scenarios such as power grid failures, floods, or disease spread and observe how interconnected systems like transport, healthcare, and energy influence cascading effects. Built as a full-stack system with a Python backend simulation engine and a real-time web visualization frontend.",
-            tags: ["Simulation", "Systems", "Real-time"],
-            tech: ["Python", "NetworkX", "FastAPI", "JavaScript", "Canvas", "WebSockets", "HTML/CSS"],
-            linkText: "Live Simulation",
-            link: "https://city-crisis-simulator.vercel.app/",
-            colSpan: "md:col-span-6 lg:col-span-8",
-            delay: "1.0s",
-            type: "standard"
-        },
-
-        {
-            title: "Debate Elo Tracker",
-            description: "A full-stack MERN application for tracking competitive debate performance in real time. Features dynamic rankings, analytics visualizations, tournament management, and Elo history computation.",
-            tags: ["Full-stack", "Data", "Real-time"],
-            tech: ["MongoDB", "Express", "React", "Node.js", "JavaScript"],
-            linkText: "Project View",
-            link: "https://mindqueblast.github.io/debate-elo-tracker/",
-            colSpan: "md:col-span-6 lg:col-span-8",
             delay: "0.1s",
-            type: "hero-right"
+            type: "hero-left"
         },
         {
             title: "Fullstack Chat App",
@@ -66,14 +32,15 @@ const portfolioData = {
             type: "standard"
         },
         {
-            title: "Unity Game Development",
-            description: "A 3D Unity game developed to explore game mechanics, physics, and interactive design.",
-            tech: ["Unity", "C#"],
-            linkText: "Project Demo",
-            link: "#",
+            title: "Relativistic Black Hole Ray Tracer",
+            description: "An interactive WebGL simulation that visualizes how light propagates around a Schwarzschild black hole by numerically integrating null geodesics in curved spacetime. The renderer performs real-time GPU ray tracing to simulate gravitational lensing, Einstein rings, gravitational redshift, relativistic Doppler beaming, and accretion disk rendering, while an educational dashboard allows users to explore the underlying physics through interactive controls and real-time visualization.",
+            tags: ["Physics", "Computer Graphics", "Simulation"],
+            tech: ["JavaScript", "Vite", "Three.js", "WebGL", "GLSL", "GPU Shaders"],
+            linkText: "Live Demo",
+            link: "https://black-hole-raytracer.vercel.app",
             colSpan: "md:col-span-6 lg:col-span-8",
             delay: "0.4s",
-            type: "hero-left"
+            type: "hero-right"
         },
         {
             title: "ProcessingJS Games",
@@ -96,13 +63,24 @@ const portfolioData = {
             type: "standard"
         },
         {
+            title: "City Crisis Simulation Dashboard",
+            description: "An interactive real-time simulation tool that models how failures propagate through a city's infrastructure network using graph theory. Users can run different scenarios such as power grid failures, floods, or disease spread and observe how interconnected systems like transport, healthcare, and energy influence cascading effects. Built as a full-stack system with a Python backend simulation engine and a real-time web visualization frontend.",
+            tags: ["Simulation", "Systems", "Real-time"],
+            tech: ["Python", "NetworkX", "FastAPI", "JavaScript", "Canvas", "WebSockets", "HTML/CSS"],
+            linkText: "Live Simulation",
+            link: "https://city-crisis-simulator.vercel.app/",
+            colSpan: "md:col-span-6 lg:col-span-8",
+            delay: "0.7s",
+            type: "hero-left"
+        },
+        {
             title: "Arduino Paper Folder Sorter",
             description: "Built a tiny Arduino-controlled paper sorter using a webcam to detect Lucky Charms vs. Marshmallows, automating sorting tasks.",
             tech: ["Arduino", "Python", "Computer Vision"],
             linkText: "Project Details",
             link: "#",
             colSpan: "md:col-span-6 lg:col-span-4",
-            delay: "0.7s",
+            delay: "0.8s",
             type: "standard"
         },
         {
@@ -112,7 +90,28 @@ const portfolioData = {
             linkText: "Project View",
             link: "#",
             colSpan: "md:col-span-6 lg:col-span-4",
-            delay: "0.8s",
+            delay: "0.9s",
+            type: "standard"
+        },
+        {
+            title: "Debate Elo Tracker",
+            description: "A full-stack MERN application for tracking competitive debate performance in real time. Features dynamic rankings, analytics visualizations, tournament management, and Elo history computation.",
+            tags: ["Full-stack", "Data", "Real-time"],
+            tech: ["MongoDB", "Express", "React", "Node.js", "JavaScript"],
+            linkText: "Project View",
+            link: "https://mindqueblast.github.io/debate-elo-tracker/",
+            colSpan: "md:col-span-6 lg:col-span-8",
+            delay: "1.0s",
+            type: "hero-right"
+        },
+        {
+            title: "Unity Game Development",
+            description: "A 3D Unity game developed to explore game mechanics, physics, and interactive design.",
+            tech: ["Unity", "C#"],
+            linkText: "Project Demo",
+            link: "#",
+            colSpan: "md:col-span-6 lg:col-span-4",
+            delay: "1.1s",
             type: "standard"
         },
         {
@@ -121,9 +120,9 @@ const portfolioData = {
             tech: ["Python", "Computer Vision", "Drone Control"],
             linkText: "Project Demo",
             link: "#",
-            colSpan: "md:col-span-6 lg:col-span-8",
-            delay: "0.9s",
-            type: "hero-left"
+            colSpan: "md:col-span-6 lg:col-span-4",
+            delay: "1.2s",
+            type: "standard"
         }
     ],
     skills: [
