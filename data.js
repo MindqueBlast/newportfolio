@@ -9,7 +9,7 @@ const portfolioData = {
             link: "https://terra-watch-mu.vercel.app",
             colSpan: "md:col-span-6 lg:col-span-8",
             delay: "1.1s",
-            type: "hero-right"
+            type: "hero-left"
         },
         {
             title: "Relativistic Black Hole Ray Tracer",
