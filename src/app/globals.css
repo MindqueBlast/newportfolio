@@ -37,11 +37,7 @@ html {
 
 body {
   min-height: 100%;
-  background:
-    radial-gradient(ellipse 90% 55% at 70% -5%, rgba(232, 164, 90, 0.16), transparent 55%),
-    radial-gradient(ellipse 70% 50% at -10% 30%, rgba(126, 200, 196, 0.1), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(26, 36, 56, 0.9), transparent),
-    var(--space-deep);
+  background: var(--space-deep);
   color: var(--text-primary);
   font-family: var(--font-body);
   overflow-x: clip;

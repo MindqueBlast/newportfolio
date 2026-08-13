@@ -1,77 +1,49 @@
 "use client";
 
+import { OverlaySection } from "@/components/observatory/OverlaySection";
 import { ProjectPanel } from "@/components/observatory/ProjectPanel";
-import { SceneSlot } from "@/components/observatory/SceneSlot";
-import { Section } from "@/components/observatory/Section";
-import { VisibilityGate } from "@/components/observatory/VisibilityGate";
 import { getProject, projects } from "@/content/projects";
 import type { Project } from "@/content/types";
-import { getDprCap, getQualityTier } from "@/lib/quality";
-import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
-
-const ConstellationScene = dynamic(
-  () =>
-    import("@/scenes/constellation/ConstellationScene").then(
-      (m) => m.ConstellationScene,
-    ),
-  { ssr: false },
-);
+import { useScrollUniverse } from "@/universe/scroll-store";
+import { useMemo } from "react";
 
 export function ConstellationSection() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [tier, setTier] = useState(getQualityTier());
-  useEffect(() => setTier(getQualityTier()), []);
-  const dpr = getDprCap(tier);
+  const { selectedProjectId, setSelectedProjectId } = useScrollUniverse();
   const selected = useMemo(
-    () => (selectedId ? getProject(selectedId) ?? null : null),
-    [selectedId],
+    () => (selectedProjectId ? getProject(selectedProjectId) ?? null : null),
+    [selectedProjectId],
   );
-
   const highlights = projects.filter((p) => p.tier === "highlight");
   const rest = projects.filter((p) => p.tier !== "highlight");
 
   return (
-    <Section
+    <OverlaySection
       id="constellation"
       eyebrow="Constellation"
       title="Projects as artifacts in orbit"
+      wide
     >
-      <p className="mb-6 max-w-2xl text-sm text-[color:var(--text-muted)]">
-        Highlight nodes — Black Hole Ray Tracer, TerraWatch, City Crisis — sit
-        larger in the field. Select any node for details. An accessible list
-        mirrors the map.
+      <p className="mb-4 text-sm text-[color:var(--text-muted)]">
+        The starfield around you is the project map. Open any artifact below —
+        highlights sit larger in the field ahead.
       </p>
-      <SceneSlot
-        sceneId="constellation"
-        className="mb-8 h-[480px] rounded-2xl border border-[color:var(--line)] md:h-[560px]"
-        fallbackClassName="constellation-fallback"
-      >
-        <VisibilityGate className="h-full w-full">
-          <ConstellationScene
-            dpr={dpr}
-            selectedId={selectedId}
-            onSelect={setSelectedId}
-            interactive
-          />
-        </VisibilityGate>
-      </SceneSlot>
-
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         <ProjectList
-          heading="Highlighted systems"
+          heading="Highlighted"
           items={highlights}
-          onSelect={setSelectedId}
+          onSelect={setSelectedProjectId}
         />
         <ProjectList
-          heading="Supporting artifacts"
+          heading="Supporting"
           items={rest}
-          onSelect={setSelectedId}
+          onSelect={setSelectedProjectId}
         />
       </div>
-
-      <ProjectPanel project={selected} onClose={() => setSelectedId(null)} />
-    </Section>
+      <ProjectPanel
+        project={selected}
+        onClose={() => setSelectedProjectId(null)}
+      />
+    </OverlaySection>
   );
 }
 
@@ -86,16 +58,16 @@ function ProjectList({
 }) {
   return (
     <div>
-      <h3 className="mb-3 text-xs uppercase tracking-[0.18em] text-[color:var(--cyan)]">
+      <h3 className="mb-2 text-[10px] uppercase tracking-[0.18em] text-[color:var(--instrument)]">
         {heading}
       </h3>
-      <ul className="space-y-2">
+      <ul className="max-h-64 space-y-2 overflow-y-auto pr-1">
         {items.map((p) => (
           <li key={p.id}>
             <button
               type="button"
               onClick={() => onSelect(p.id)}
-              className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3 text-left transition hover:border-[color:var(--cyan)]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--cyan)]"
+              className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2.5 text-left transition hover:border-[color:var(--stellar)]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--instrument)]"
             >
               <span className="font-[family-name:var(--font-display)] text-sm text-[color:var(--text-primary)]">
                 {p.title}

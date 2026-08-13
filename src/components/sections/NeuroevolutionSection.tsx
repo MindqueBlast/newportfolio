@@ -1,7 +1,7 @@
 "use client";
 
 import { DemoSourceLinks } from "@/components/observatory/LinkPlaceholders";
-import { Section } from "@/components/observatory/Section";
+import { OverlaySection } from "@/components/observatory/OverlaySection";
 import { getProject } from "@/content/projects";
 import { getQualityTier } from "@/lib/quality";
 import { NeuroevolutionSim } from "@/simulations/neuroevolution/NeuroevolutionSim";
@@ -13,15 +13,18 @@ export function NeuroevolutionSection() {
   useEffect(() => setTier(getQualityTier()), []);
 
   return (
-    <Section
+    <OverlaySection
       id="neuroevolution"
       eyebrow="Flagship artifact"
       title={project.title}
+      wide
     >
-      <p className="mb-6 max-w-3xl text-base leading-relaxed text-[color:var(--text-secondary)]">
+      <p className="mb-4 text-sm leading-relaxed text-[color:var(--text-secondary)] md:text-base">
         {project.description}
       </p>
-      <NeuroevolutionSim tier={tier} />
+      <div className="-mx-2 overflow-hidden rounded-xl md:-mx-3">
+        <NeuroevolutionSim tier={tier} />
+      </div>
       <ul className="mt-4 flex flex-wrap gap-2">
         {project.tech.map((t) => (
           <li
@@ -33,11 +36,8 @@ export function NeuroevolutionSection() {
         ))}
       </ul>
       <div className="mt-6">
-        <DemoSourceLinks
-          demo={project.links.demo}
-          source={project.links.source}
-        />
+        <DemoSourceLinks demo={project.links.demo} source={project.links.source} />
       </div>
-    </Section>
+    </OverlaySection>
   );
 }
