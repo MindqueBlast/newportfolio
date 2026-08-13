@@ -23,15 +23,14 @@ export function ArrivalSection() {
           {site.headline}
         </p>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-[color:var(--text-muted)] md:text-base">
-          Scroll to fly through one continuous space — systems, simulations, and
-          research along a single trajectory.
+          {site.support}
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
-          <a href="#fenlens" className="btn-primary">
-            Begin flight
+          <a href="#about" className="btn-primary">
+            Enter the field
           </a>
           <a href="#contact" className="btn-ghost">
-            Contact
+            Transmit
           </a>
         </div>
       </div>

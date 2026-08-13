@@ -8,9 +8,10 @@ type OverlaySectionProps = {
   title?: string;
   children: ReactNode;
   className?: string;
-  /** Full-viewport chapter for the continuous flight */
   chapter?: boolean;
   wide?: boolean;
+  short?: boolean;
+  side?: "left" | "right";
 };
 
 export function OverlaySection({
@@ -21,22 +22,37 @@ export function OverlaySection({
   className = "",
   chapter = true,
   wide = false,
+  short = false,
+  side = "left",
 }: OverlaySectionProps) {
+  const height = short
+    ? "min-h-[70svh]"
+    : chapter
+      ? "min-h-[100svh]"
+      : "py-20";
+
   return (
     <section
       id={id}
-      className={`relative z-10 scroll-mt-20 ${
-        chapter ? "flex min-h-[100svh] items-end md:items-center" : "py-20"
-      } px-4 py-24 md:px-8 ${className}`}
+      className={`relative z-10 scroll-mt-20 ${height} flex items-end md:items-center px-4 py-20 md:px-8 ${className}`}
       aria-labelledby={title ? `${id}-title` : undefined}
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[color:var(--space-deep)]/85 via-[color:var(--space-deep)]/45 to-transparent md:max-w-[58%]"
+        className={`pointer-events-none absolute inset-0 ${
+          side === "left"
+            ? "bg-gradient-to-r from-[color:var(--space-deep)]/88 via-[color:var(--space-deep)]/50 to-transparent md:max-w-[55%]"
+            : "ml-auto bg-gradient-to-l from-[color:var(--space-deep)]/88 via-[color:var(--space-deep)]/50 to-transparent md:max-w-[55%]"
+        }`}
         aria-hidden
       />
-      <div className="relative z-10 mx-auto w-full max-w-6xl" data-reveal>
+      <div
+        className={`relative z-10 mx-auto flex w-full max-w-6xl ${
+          side === "right" ? "justify-end" : "justify-start"
+        }`}
+        data-reveal
+      >
         <div
-          className={`pointer-events-auto rounded-2xl border border-[color:var(--line)] bg-[color:var(--panel)] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl md:p-8 ${
+          className={`pointer-events-auto rounded-2xl border border-[color:var(--line)] bg-[color:var(--panel)] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.4)] backdrop-blur-xl md:p-8 ${
             wide ? "max-w-3xl" : "max-w-xl"
           }`}
         >

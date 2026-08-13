@@ -43,7 +43,7 @@ export function ProjectPanel({ project, onClose }: ProjectPanelProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-panel-title"
-            className="instrument-panel relative max-h-[85vh] w-full max-w-lg overflow-y-auto"
+            className="instrument-panel relative max-h-[85vh] w-full max-w-lg overflow-y-auto obs-scroll"
             initial={{ y: 24, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 16, opacity: 0 }}

@@ -7,7 +7,7 @@ import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { sampleCamera } from "./camera-path";
+import { CAMERA_PATH, sampleCamera } from "./camera-path";
 import { useScrollUniverse } from "./scroll-store";
 
 const UniverseWorld = dynamic(
@@ -16,16 +16,31 @@ const UniverseWorld = dynamic(
 );
 
 function ScrollCamera({ animate }: { animate: boolean }) {
-  const { progress } = useScrollUniverse();
+  const { progress, activeChapter } = useScrollUniverse();
   const look = useRef(new THREE.Vector3());
   const targetPos = useRef(new THREE.Vector3());
   const targetLook = useRef(new THREE.Vector3());
 
-  useFrame(({ camera }, dt) => {
+  useFrame(({ camera, pointer }, dt) => {
+    // Reduced motion: freeze on chapter centers; static 3D still visible.
+    if (!animate) {
+      const wp =
+        CAMERA_PATH.find((w) => w.id === activeChapter) ?? CAMERA_PATH[0];
+      camera.position.set(...wp.position);
+      look.current.set(...wp.lookAt);
+      camera.lookAt(look.current);
+      return;
+    }
+
     const sample = sampleCamera(progress);
-    targetPos.current.set(...sample.position);
+    const parallax = 0.28;
+    targetPos.current.set(
+      sample.position[0] + pointer.x * parallax,
+      sample.position[1] + pointer.y * parallax * 0.45,
+      sample.position[2],
+    );
     targetLook.current.set(...sample.lookAt);
-    const alpha = animate ? 1 - Math.exp(-dt * 3.5) : 1;
+    const alpha = 1 - Math.exp(-dt * 3.2);
     camera.position.lerp(targetPos.current, alpha);
     look.current.lerp(targetLook.current, alpha);
     camera.lookAt(look.current);
@@ -44,7 +59,7 @@ function UniverseCanvasInner() {
   return (
     <Canvas
       dpr={dpr}
-      camera={{ position: [0, 1.2, 8.5], fov: 42, near: 0.1, far: 200 }}
+      camera={{ position: [0, 1.4, 9.2], fov: 40, near: 0.1, far: 220 }}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ width: "100%", height: "100%", pointerEvents: "none" }}
     >
@@ -53,12 +68,12 @@ function UniverseCanvasInner() {
       {tier !== "low" ? (
         <EffectComposer>
           <Bloom
-            intensity={0.5}
-            luminanceThreshold={0.32}
-            luminanceSmoothing={0.7}
+            intensity={0.45}
+            luminanceThreshold={0.35}
+            luminanceSmoothing={0.72}
             mipmapBlur
           />
-          <Vignette eskil={false} offset={0.2} darkness={0.5} />
+          <Vignette eskil={false} offset={0.22} darkness={0.48} />
         </EffectComposer>
       ) : null}
     </Canvas>

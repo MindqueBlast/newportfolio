@@ -21,5 +21,5 @@ export const site = {
     },
   },
   identityArc:
-    "math → physics/astrophysics → AI/ML → robotics/engineering → building → research → teaching → chess",
+    "math → physics/astrophysics → AI/ML → robotics/engineering → building → research → teaching",
 } as const;

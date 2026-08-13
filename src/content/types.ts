@@ -9,6 +9,15 @@ export type ConstellationVisual =
   | "network"
   | "default";
 
+export type ProjectDomain =
+  | "cv"
+  | "physics"
+  | "geospatial"
+  | "simulation"
+  | "fullstack"
+  | "robotics"
+  | "games";
+
 export type Project = {
   id: string;
   title: string;
@@ -17,6 +26,8 @@ export type Project = {
   tech: string[];
   tags?: string[];
   tier: ProjectTier;
+  domain?: ProjectDomain;
+  relatedIds?: string[];
   constellation?: {
     size: "lg" | "md" | "sm";
     visual: ConstellationVisual;

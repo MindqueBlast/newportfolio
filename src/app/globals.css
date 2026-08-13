@@ -1,24 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  /* Deep observatory ink + warm stellar — not purple neon */
   --space-deep: #070b14;
   --space-mid: #10182a;
   --space-lift: #1a2438;
   --instrument: #7ec8c4;
   --stellar: #e8a45a;
   --ember: #d4784a;
+  --violet: #8b6cff;
   --aurora: #8fd4c8;
   --signal: #f0d7a8;
   --text-primary: #f3efe6;
   --text-secondary: #c4bbaa;
   --text-muted: #8a8378;
-  --panel: rgba(16, 24, 42, 0.78);
+  --panel: rgba(14, 20, 36, 0.82);
   --line: rgba(240, 215, 168, 0.14);
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
-
-  /* legacy aliases used in components */
   --cyan: var(--instrument);
   --magenta: var(--ember);
   --nebula-violet: #2a3d5c;
@@ -47,6 +45,26 @@ body {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Subtle observatory scrollbars — only where overflow is intentional */
+.obs-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232, 164, 90, 0.35) transparent;
+}
+
+.obs-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.obs-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.obs-scroll::-webkit-scrollbar-thumb {
+  background: rgba(232, 164, 90, 0.35);
+  border-radius: 999px;
 }
 
 .instrument-panel {
@@ -100,35 +118,11 @@ body {
   background: rgba(243, 239, 230, 0.06);
 }
 
-.scene-slot {
-  background: transparent;
-  isolation: isolate;
-}
-
-.scene-fallback {
-  background:
-    radial-gradient(circle at 55% 40%, rgba(232, 164, 90, 0.22), transparent 42%),
-    radial-gradient(circle at 30% 60%, rgba(126, 200, 196, 0.12), transparent 40%),
-    linear-gradient(165deg, #121a2c, #070b14 70%);
-}
-
 .arrival-fallback {
   background:
-    radial-gradient(ellipse at 62% 42%, rgba(232, 164, 90, 0.35), transparent 38%),
+    radial-gradient(ellipse at 62% 42%, rgba(196, 75, 154, 0.28), transparent 38%),
     radial-gradient(ellipse at 35% 55%, rgba(126, 200, 196, 0.18), transparent 45%),
     linear-gradient(180deg, #0c1424, #070b14);
-}
-
-.signal-fallback,
-.fenlens-fallback,
-.desk-fallback,
-.constellation-fallback,
-.exploring-fallback,
-.journey-fallback,
-.contact-fallback {
-  background:
-    radial-gradient(circle at 50% 45%, rgba(232, 164, 90, 0.14), transparent 45%),
-    #0a1220;
 }
 
 ::selection {
