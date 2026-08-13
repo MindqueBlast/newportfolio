@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+:root {
+  --space-deep: #0b1224;
+  --space-mid: #121a33;
+  --nebula-violet: #6b3fa0;
+  --magenta: #c44b9a;
+  --cyan: #3ecfff;
+  --stellar: #ffb86b;
+  --aurora: #7dffb3;
+  --text-primary: #eef3ff;
+  --text-secondary: #b7c4e0;
+  --text-muted: #8490b0;
+  --panel: rgba(18, 26, 51, 0.72);
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--space-deep);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-body);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(196, 75, 154, 0.28), transparent),
+    radial-gradient(ellipse 70% 45% at 90% 10%, rgba(62, 207, 255, 0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(107, 63, 160, 0.22), transparent),
+    var(--space-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.instrument-panel {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--panel);
+  padding: 1rem 1.1rem;
+  backdrop-filter: blur(12px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  background: linear-gradient(135deg, rgba(62, 207, 255, 0.9), rgba(155, 123, 255, 0.85));
+  color: #061018;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.1rem;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.1rem;
+  transition: background 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.scene-slot {
+  background: rgba(8, 12, 28, 0.65);
+}
+
+.scene-fallback {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(196, 75, 154, 0.35), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(62, 207, 255, 0.25), transparent 50%),
+    linear-gradient(160deg, #121a33, #0b1224);
+}
+
+.arrival-fallback {
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(107, 63, 160, 0.45), transparent 50%),
+    radial-gradient(ellipse at 20% 70%, rgba(255, 184, 107, 0.2), transparent 45%),
+    linear-gradient(180deg, #152048, #0b1224);
+}
+
+.signal-fallback {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 184, 107, 0.3), transparent 40%),
+    radial-gradient(circle at 70% 40%, rgba(62, 207, 255, 0.2), transparent 45%),
+    #0d1630;
+}
+
+.fenlens-fallback {
+  background:
+    linear-gradient(135deg, #1a2240 25%, #d8e2ff 25% 50%, #1a2240 50% 75%, #d8e2ff 75%),
+    #121a33;
+  background-size: 40px 40px;
+  opacity: 1;
+}
+
+.desk-fallback {
+  background:
+    linear-gradient(180deg, transparent 55%, rgba(44, 58, 94, 0.8) 55%),
+    radial-gradient(circle at 50% 35%, rgba(62, 207, 255, 0.25), transparent 40%),
+    #0e162c;
+}
+
+.constellation-fallback {
+  background:
+    radial-gradient(circle at 20% 30%, #c44b9a 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 40%, #3ecfff 0 3px, transparent 4px),
+    radial-gradient(circle at 45% 70%, #ffb86b 0 3px, transparent 4px),
+    radial-gradient(circle at 80% 75%, #9b7bff 0 2px, transparent 3px),
+    #0b1224;
+}
+
+.exploring-fallback,
+.journey-fallback,
+.contact-fallback {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(62, 207, 255, 0.2), transparent 45%),
+    #0d1530;
+}
+
+::selection {
+  background: rgba(62, 207, 255, 0.35);
+}
