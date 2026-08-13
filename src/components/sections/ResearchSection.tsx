@@ -10,7 +10,7 @@ export function ResearchSection() {
   return (
     <OverlaySection
       id="research"
-      eyebrow="Research moment"
+      eyebrow="Research"
       title={entry.title}
       short
       side="right"

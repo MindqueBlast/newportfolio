@@ -48,12 +48,12 @@ export const CHAPTER_WEIGHTS: Record<ChapterId, number> = {
 };
 
 export const NAV_LINKS = [
-  { href: "#arrival", label: "Arrival" },
+  { href: "#arrival", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#journey", label: "Journey" },
   { href: "#fenlens", label: "Projects" },
   { href: "#skills", label: "Skills" },
   { href: "#awards", label: "Awards" },
-  { href: "#exploring", label: "Exploring" },
-  { href: "#contact", label: "Transmit" },
+  { href: "#exploring", label: "Focus" },
+  { href: "#contact", label: "Contact" },
 ] as const;

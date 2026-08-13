@@ -1,10 +1,10 @@
 export const site = {
   name: "Aaditya Sahu",
   brand: "Aaditya Sahu",
-  tagline: "Systems for messy reality — computation, vision, physics.",
-  headline: "Observatory of systems I build",
+  tagline: "I build systems for messy reality — computation, vision, physics.",
+  headline: "I build systems across vision, simulation, and math",
   support:
-    "Interactive artifacts across computer vision, simulation, robotics, and mathematics — with astrophysics on the horizon.",
+    "I'm a high school student teaching myself computer vision, robotics, AI, and scientific software — with astrophysics on my horizon.",
   email: "aadityasahu26@gmail.com",
   socials: {
     github: "https://github.com/MindqueBlast",
@@ -17,7 +17,7 @@ export const site = {
     independent: {
       title: "Independent software engineering",
       years: "2017–Present",
-      note: "Self-taught systems, data, and AI — coding since age 7.",
+      note: "I've been coding since I was 7 — mostly self-taught systems, data, and AI.",
     },
   },
   identityArc:

@@ -5,38 +5,41 @@ export const exploring: ExploringOrbit[] = [
     id: "ammoc",
     label: "AMMOC — Analysis & Linear Algebra",
     blurb:
-      "Guided study through Real Analysis (incl. Tao) and Linear Algebra.",
+      "I'm working through Real Analysis (including Tao) and Linear Algebra in guided study.",
     status: "active",
     researchId: "ammoc-analysis",
   },
   {
     id: "cv",
     label: "Computer vision systems",
-    blurb: "Board detection, pose, telemetry — shipping interactive CV tools.",
+    blurb:
+      "I'm building board detection, pose, and interactive CV tools I actually ship.",
     status: "active",
   },
   {
     id: "neuroevo",
     label: "Neuroevolution & sim",
-    blurb: "Evolving controllers, fitness landscapes, emergent behavior.",
+    blurb:
+      "I'm evolving controllers and watching fitness landscapes and emergent behavior.",
     status: "active",
   },
   {
     id: "robotics",
     label: "Robotics & control",
-    blurb: "PID, VEX competition stacks, physical systems that move.",
+    blurb: "I'm into PID, VEX stacks, and physical systems that move.",
     status: "active",
   },
   {
     id: "geospatial",
     label: "Geospatial computing",
-    blurb: "Earth-scale data and spatial visualization (TerraWatch track).",
+    blurb:
+      "I'm exploring Earth-scale data and spatial visualization (TerraWatch track).",
     status: "active",
   },
   {
     id: "astro-research",
     label: "Astrophysics research",
-    blurb: "Future orbit — not started yet.",
+    blurb: "Something I want to do — not started yet.",
     status: "planned",
     researchId: "astrophysics-future",
   },

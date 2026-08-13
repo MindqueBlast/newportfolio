@@ -51,13 +51,15 @@ export function ObservatoryExperience() {
         <ChessSection />
         <ContactSection />
       </main>
-      <footer className="relative z-10 border-t border-[color:var(--line)] bg-[color:var(--space-deep)]/70 px-4 py-10 backdrop-blur-md md:px-8">
+      <footer className="pointer-events-auto relative z-10 border-t border-[color:var(--line)] bg-[color:var(--space-deep)]/70 px-4 py-10 backdrop-blur-md md:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 text-sm text-[color:var(--text-muted)] md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.name}. One continuous observatory
-            flight.
+            © {new Date().getFullYear()} {site.name}. Built as one continuous
+            space experience.
           </p>
-          <p className="text-xs">Scroll to travel · content works without WebGL.</p>
+          <p className="text-xs">
+            Scroll to move through chapters · click nodes to explore.
+          </p>
         </div>
       </footer>
     </ScrollUniverseProvider>

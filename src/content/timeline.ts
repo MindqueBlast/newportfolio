@@ -4,17 +4,17 @@ export const timeline: TimelineWaypoint[] = [
   {
     id: "start-coding",
     year: "2017",
-    title: "Started coding",
+    title: "I started coding",
     description:
-      "Learned programming on Khan Academy at age 7, experimenting with basic interactive graphics.",
+      "I learned programming on Khan Academy at age 7, messing around with interactive graphics.",
     kind: "standard",
   },
   {
     id: "khan-complete",
     year: "2019",
-    title: "Completed all Khan courses",
+    title: "I finished every Khan course",
     description:
-      "Finished every programming course on Khan Academy and started building custom games.",
+      "I completed all the programming courses on Khan Academy and started building my own games.",
     kind: "standard",
   },
   {
@@ -22,16 +22,16 @@ export const timeline: TimelineWaypoint[] = [
     year: "2020–2022",
     title: "Games & competitions",
     description:
-      "Created multiple games, won programming competitions, and moved into deeper tutorials and platforms.",
+      "I made a bunch of games, won programming competitions, and pushed into deeper tutorials and platforms.",
     kind: "standard",
     awardIds: ["khan-programming"],
   },
   {
     id: "math-comps",
     year: "Math tournaments",
-    title: "Competitive mathematics",
+    title: "Competitive math",
     description:
-      "Berkeley and Stanford math tournaments, AMO Silver, and AMC Prize (top 0.3%).",
+      "I competed at Berkeley and Stanford math tournaments, earned AMO Silver, and an AMC Prize (top 0.3%).",
     kind: "standard",
     awardIds: [
       "berkeley-math",
@@ -43,17 +43,17 @@ export const timeline: TimelineWaypoint[] = [
   {
     id: "hardware",
     year: "2023–2024",
-    title: "Hardware & robotics experiments",
+    title: "Hardware & robotics",
     description:
-      "Arduinos, wiring, drones, RC airframes, and early computer-vision automation.",
+      "I spent a lot of time with Arduinos, wiring, drones, RC airframes, and early computer-vision automation.",
     kind: "standard",
   },
   {
     id: "scioly",
     year: "Science Olympiad",
-    title: "Science Olympiad placements",
+    title: "Science Olympiad",
     description:
-      "Regional and state results across Astronomy, Robot Tour, Bungee Drop, Water Quality, and Experimental Design.",
+      "I placed regionally and at state in Astronomy, Robot Tour, Bungee Drop, Water Quality, and Experimental Design.",
     kind: "standard",
     awardIds: [
       "bungee-drop",
@@ -69,15 +69,15 @@ export const timeline: TimelineWaypoint[] = [
     year: "Summer 2025",
     title: "AI & machine learning",
     description:
-      "Focused on AI/ML, fine-tuning, and neural applications — leading into agentic systems and teaching.",
+      "I focused hard on AI/ML, fine-tuning, and neural applications — which led into agentic systems and teaching.",
     kind: "standard",
   },
   {
     id: "teaching-ssu",
     year: "Teaching",
-    title: "Agentic AI workshop",
+    title: "I taught an Agentic AI workshop",
     description:
-      "Intensive Agentic AI workshop at Shri Shri University spanning ML evaluation, data engineering, LLMs, PEFT, RAG, and agent workflows.",
+      "I ran an intensive Agentic AI workshop at Shri Shri University covering ML evaluation, data engineering, LLMs, PEFT, RAG, and agents.",
     kind: "standard",
     teachingId: "ssu-agentic-ai",
   },
@@ -86,7 +86,7 @@ export const timeline: TimelineWaypoint[] = [
     year: "Now",
     title: "AMMOC — analysis & linear algebra",
     description:
-      "Guided study in Linear Algebra and Real Analysis, including Terence Tao’s analysis material.",
+      "I'm in guided study through Linear Algebra and Real Analysis, including Terence Tao’s analysis material.",
     kind: "standard",
     researchId: "ammoc-analysis",
   },
@@ -95,7 +95,7 @@ export const timeline: TimelineWaypoint[] = [
     year: "2025–2026",
     title: "Vision systems & simulations",
     description:
-      "FenLens, Smart Desk, Neuroevolution, City Crisis, and related engineering systems.",
+      "I've been shipping FenLens, Smart Desk, Neuroevolution, City Crisis, and related systems.",
     kind: "standard",
   },
   {
@@ -103,7 +103,7 @@ export const timeline: TimelineWaypoint[] = [
     year: "Future",
     title: "Astrophysics research",
     description:
-      "Planned direction — not started. Placeholder for future research.",
+      "I want to do astrophysics research someday — I haven't started yet.",
     kind: "planned",
     researchId: "astrophysics-future",
   },

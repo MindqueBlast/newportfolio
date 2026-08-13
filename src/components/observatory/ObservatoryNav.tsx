@@ -8,7 +8,7 @@ export function ObservatoryNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--space-deep)]/75 backdrop-blur-xl">
+    <header className="pointer-events-auto fixed inset-x-0 top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--space-deep)]/75 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
         <a
           href="#arrival"

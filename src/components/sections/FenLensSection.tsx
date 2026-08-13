@@ -7,7 +7,7 @@ import { getProject } from "@/content/projects";
 export function FenLensSection() {
   const project = getProject("fenlens")!;
   return (
-    <OverlaySection id="fenlens" eyebrow="Flagship system" title={project.title}>
+    <OverlaySection id="fenlens" eyebrow="Flagship" title={project.title}>
       <p className="text-sm leading-relaxed text-[color:var(--text-secondary)] md:text-base">
         {project.description}
       </p>
@@ -15,7 +15,7 @@ export function FenLensSection() {
         {project.tech.map((t) => (
           <li
             key={t}
-            className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-wider text-[color:var(--text-muted)]"
+            className="border border-white/15 px-2.5 py-1 text-[10px] uppercase tracking-wider text-[color:var(--text-muted)]"
           >
             {t}
           </li>

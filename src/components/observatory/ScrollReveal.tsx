@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/** Subtle fade/rise for section blocks — disabled under reduced motion. */
+/** Fade/rise for section blocks — disabled under reduced motion. */
 export function ScrollReveal() {
   const { reducedMotion, ready } = useGraphicsMode();
 
@@ -18,16 +18,17 @@ export function ScrollReveal() {
     const tweens = targets.map((el) =>
       gsap.fromTo(
         el,
-        { opacity: 0.35, y: 28 },
+        { opacity: 0.2, y: 36, filter: "blur(4px)" },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power2.out",
+          filter: "blur(0px)",
+          duration: 0.95,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 88%",
-            toggleActions: "play none none none",
+            start: "top 90%",
+            toggleActions: "play none none reverse",
           },
         },
       ),

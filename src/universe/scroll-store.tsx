@@ -10,18 +10,34 @@ import {
   type ReactNode,
 } from "react";
 
+/** Chapters where the canvas should receive pointer events for 3D picking. */
+export const INTERACTIVE_CHAPTERS: ChapterId[] = [
+  "journey",
+  "constellation",
+  "skills",
+  "awards",
+  "exploring",
+];
+
 type ScrollUniverseValue = {
   progress: number;
   setProgress: (n: number) => void;
   activeChapter: ChapterId;
+  canvasInteractive: boolean;
+  journeyIndex: number;
+  setJourneyIndex: (n: number) => void;
   selectedProjectId: string | null;
   setSelectedProjectId: (id: string | null) => void;
+  hoveredProjectId: string | null;
+  setHoveredProjectId: (id: string | null) => void;
   selectedSkillDomain: string | null;
   setSelectedSkillDomain: (id: string | null) => void;
   selectedAwardId: string | null;
   setSelectedAwardId: (id: string | null) => void;
   awardFilter: "all" | "cs" | "math" | "science";
   setAwardFilter: (f: "all" | "cs" | "math" | "science") => void;
+  exploringFocusId: string | null;
+  setExploringFocusId: (id: string | null) => void;
 };
 
 const ScrollUniverseContext = createContext<ScrollUniverseValue | null>(null);
@@ -29,9 +45,11 @@ const ScrollUniverseContext = createContext<ScrollUniverseValue | null>(null);
 export function ScrollUniverseProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState(0);
   const [activeChapter, setActiveChapter] = useState<ChapterId>("arrival");
+  const [journeyIndex, setJourneyIndex] = useState(0);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
     null,
   );
+  const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const [selectedSkillDomain, setSelectedSkillDomain] = useState<string | null>(
     "ai-ml",
   );
@@ -39,6 +57,9 @@ export function ScrollUniverseProvider({ children }: { children: ReactNode }) {
   const [awardFilter, setAwardFilter] = useState<
     "all" | "cs" | "math" | "science"
   >("all");
+  const [exploringFocusId, setExploringFocusId] = useState<string | null>(
+    "ammoc",
+  );
 
   useEffect(() => {
     const total = CHAPTER_ORDER.reduce((s, id) => s + CHAPTER_WEIGHTS[id], 0);
@@ -55,27 +76,40 @@ export function ScrollUniverseProvider({ children }: { children: ReactNode }) {
     setActiveChapter(found);
   }, [progress]);
 
+  const canvasInteractive = INTERACTIVE_CHAPTERS.includes(activeChapter);
+
   const value = useMemo(
     () => ({
       progress,
       setProgress,
       activeChapter,
+      canvasInteractive,
+      journeyIndex,
+      setJourneyIndex,
       selectedProjectId,
       setSelectedProjectId,
+      hoveredProjectId,
+      setHoveredProjectId,
       selectedSkillDomain,
       setSelectedSkillDomain,
       selectedAwardId,
       setSelectedAwardId,
       awardFilter,
       setAwardFilter,
+      exploringFocusId,
+      setExploringFocusId,
     }),
     [
       progress,
       activeChapter,
+      canvasInteractive,
+      journeyIndex,
       selectedProjectId,
+      hoveredProjectId,
       selectedSkillDomain,
       selectedAwardId,
       awardFilter,
+      exploringFocusId,
     ],
   );
 

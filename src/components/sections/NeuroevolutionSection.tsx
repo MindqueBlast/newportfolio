@@ -15,7 +15,7 @@ export function NeuroevolutionSection() {
   return (
     <OverlaySection
       id="neuroevolution"
-      eyebrow="Flagship artifact"
+      eyebrow="Flagship"
       title={project.title}
       wide
     >

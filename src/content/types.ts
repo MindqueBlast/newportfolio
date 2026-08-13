@@ -62,6 +62,7 @@ export type TeachingEntry = {
 };
 
 export type ChessIdentity = {
+  intro: string;
   ratings: {
     chesscomRapid: string;
     lichessRapid: string;

@@ -7,7 +7,7 @@ import { getProject } from "@/content/projects";
 export function SmartDeskSection() {
   const project = getProject("smart-desk")!;
   return (
-    <OverlaySection id="smart-desk" eyebrow="Flagship system" title={project.title}>
+    <OverlaySection id="smart-desk" eyebrow="Flagship" title={project.title} side="right">
       <p className="text-sm leading-relaxed text-[color:var(--text-secondary)] md:text-base">
         {project.description}
       </p>
