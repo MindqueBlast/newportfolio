@@ -46,7 +46,7 @@ export function FenLensSection() {
         </div>
         <SceneSlot
           sceneId="fenlens"
-          className="h-[380px]"
+          className="h-[420px] md:h-[480px] rounded-2xl border border-[color:var(--line)]"
           fallbackClassName="fenlens-fallback"
         >
           <VisibilityGate className="h-full w-full">

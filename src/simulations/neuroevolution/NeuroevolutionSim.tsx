@@ -212,7 +212,7 @@ export function NeuroevolutionSim({ tier }: { tier: QualityTier }) {
   }, [paused, slow, showBrain, reducedMotion, tier]);
 
   return (
-    <div className="relative h-full min-h-[320px] w-full overflow-hidden rounded-2xl border border-white/10">
+    <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl border border-[color:var(--line)] md:min-h-[480px]">
       <canvas ref={canvasRef} className="h-full w-full" />
       <div className="absolute left-3 top-3 space-y-1 rounded-md bg-black/40 px-3 py-2 text-[11px] text-white/85 backdrop-blur">
         <div>Generation {generation}</div>

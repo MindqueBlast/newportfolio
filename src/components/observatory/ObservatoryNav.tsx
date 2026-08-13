@@ -8,7 +8,7 @@ export function ObservatoryNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[color:var(--space-deep)]/70 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--space-deep)]/75 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
         <a
           href="#arrival"
@@ -21,7 +21,7 @@ export function ObservatoryNav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-xs uppercase tracking-[0.14em] text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--cyan)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--cyan)]"
+              className="text-xs uppercase tracking-[0.14em] text-[color:var(--text-muted)] transition-colors hover:text-[color:var(--stellar)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--instrument)]"
             >
               {link.label}
             </a>

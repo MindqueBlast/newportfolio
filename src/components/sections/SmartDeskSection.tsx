@@ -26,7 +26,7 @@ export function SmartDeskSection() {
       <div className="grid gap-8 lg:grid-cols-2">
         <SceneSlot
           sceneId="smart-desk"
-          className="order-2 h-[380px] lg:order-1"
+          className="order-2 h-[420px] rounded-2xl border border-[color:var(--line)] md:h-[480px] lg:order-1"
           fallbackClassName="desk-fallback"
         >
           <VisibilityGate className="h-full w-full">

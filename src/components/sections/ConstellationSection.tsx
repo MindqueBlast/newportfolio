@@ -44,7 +44,7 @@ export function ConstellationSection() {
       </p>
       <SceneSlot
         sceneId="constellation"
-        className="mb-8 h-[420px]"
+        className="mb-8 h-[480px] rounded-2xl border border-[color:var(--line)] md:h-[560px]"
         fallbackClassName="constellation-fallback"
       >
         <VisibilityGate className="h-full w-full">

@@ -57,7 +57,7 @@ export function SignalSection() {
         </div>
         <SceneSlot
           sceneId="signal"
-          className="h-[360px] md:h-[420px]"
+          className="h-[400px] rounded-2xl border border-[color:var(--line)] md:h-[460px]"
           fallbackClassName="signal-fallback"
         >
           <VisibilityGate className="h-full w-full">
