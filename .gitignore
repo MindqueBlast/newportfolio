@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+# build artifacts
+/.next/
+
 # misc
 .DS_Store
 *.pem
