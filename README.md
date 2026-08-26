@@ -1,23 +1,17 @@
-# Observatory Portfolio
+# Portfolio
 
-Interactive space-themed personal portfolio for **Aaditya Sahu** — hybrid observatory experience built with Next.js, React Three Fiber, GSAP, and Framer Motion.
+Personal portfolio for **Aaditya Sahu** — static site restored from `_legacy/` as the design baseline.
 
-## Develop
+## Local preview
 
 ```bash
-npm install
 npm run dev
 ```
 
-## Build
-
-```bash
-npm run build
-npm start
-```
+Opens the site at `http://localhost:3000` (via `serve`).
 
 ## Content
 
-Edit typed modules under `src/content/` — projects, awards (metadata), research, teaching, chess, timeline, exploring. Use `null` for links you have not provided yet.
+Edit `data.js` for projects, skills, awards, and timeline entries. Layout and rendering live in `index.html` and `render.js`.
 
-Legacy static site archived in `_legacy/`.
+The previous Next.js / 3D observatory experiment is removed. `_legacy/` keeps an archive copy of this static baseline.
