@@ -16,19 +16,15 @@ function buildPath(): CameraWaypoint[] {
     ChapterId,
     { position: [number, number, number]; lookAt: [number, number, number] }
   > = {
-    arrival: { position: [0.2, 1.4, 9.2], lookAt: [1.4, 0.3, 0] },
-    about: { position: [-2.2, 2.8, -4], lookAt: [0, 0.4, -8] },
-    journey: { position: [0, 2.4, -16], lookAt: [0, 0.6, -22] },
-    research: { position: [2.2, 2.2, -28], lookAt: [0.5, 0.5, -32] },
-    fenlens: { position: [2.8, 4.0, -40], lookAt: [0, 0.3, -44] },
-    "smart-desk": { position: [-3.2, 3.4, -52], lookAt: [0, 1.1, -56] },
-    neuroevolution: { position: [0.5, 2.6, -64], lookAt: [0, 0.2, -68] },
-    constellation: { position: [0, 4.5, -78], lookAt: [0, 0.2, -84] },
-    skills: { position: [-2.5, 3.2, -94], lookAt: [0, 0.5, -98] },
-    awards: { position: [2.5, 2.8, -108], lookAt: [0, 0.8, -112] },
-    exploring: { position: [1.5, 2.4, -120], lookAt: [0, 0.3, -124] },
-    chess: { position: [-1.8, 2.6, -132], lookAt: [0, 0.2, -136] },
-    contact: { position: [0, 1.6, -144], lookAt: [0, 0.5, -148] },
+    hero: { position: [0.2, 1.5, 9.5], lookAt: [1.4, 0.3, 0] },
+    about: { position: [-2.4, 2.9, -6], lookAt: [0, 0.4, -10] },
+    journey: { position: [0, 2.6, -20], lookAt: [0, 0.5, -26] },
+    projects: { position: [0, 4.8, -38], lookAt: [0, 0.2, -44] },
+    skills: { position: [-2.8, 3.4, -54], lookAt: [0, 0.4, -58] },
+    awards: { position: [2.6, 3.0, -70], lookAt: [0, 0.6, -74] },
+    focus: { position: [1.2, 2.5, -86], lookAt: [0, 0.3, -90] },
+    chess: { position: [-1.6, 2.4, -98], lookAt: [0, 0.2, -102] },
+    contact: { position: [0, 1.7, -110], lookAt: [0, 0.5, -114] },
   };
 
   return CHAPTER_ORDER.map((id) => {
@@ -41,19 +37,15 @@ function buildPath(): CameraWaypoint[] {
 export const CAMERA_PATH: CameraWaypoint[] = buildPath();
 
 export const ZONE_ORIGIN = {
-  arrival: new THREE.Vector3(1.4, 0, 0),
-  about: new THREE.Vector3(0, 0.2, -8),
-  journey: new THREE.Vector3(0, 0, -22),
-  research: new THREE.Vector3(0.5, 0.3, -32),
-  fenlens: new THREE.Vector3(0, 0, -44),
-  smartDesk: new THREE.Vector3(0, 0, -56),
-  neuro: new THREE.Vector3(0, 0, -68),
-  constellation: new THREE.Vector3(0, 0, -84),
-  skills: new THREE.Vector3(0, 0.3, -98),
-  awards: new THREE.Vector3(0, 0.5, -112),
-  exploring: new THREE.Vector3(0, 0.2, -124),
-  chess: new THREE.Vector3(0, 0.1, -136),
-  contact: new THREE.Vector3(0, 0.4, -148),
+  hero: new THREE.Vector3(1.4, 0, 0),
+  about: new THREE.Vector3(0, 0.2, -10),
+  journey: new THREE.Vector3(0, 0, -26),
+  projects: new THREE.Vector3(0, 0, -44),
+  skills: new THREE.Vector3(0, 0.3, -58),
+  awards: new THREE.Vector3(0, 0.5, -74),
+  focus: new THREE.Vector3(0, 0.2, -90),
+  chess: new THREE.Vector3(0, 0.1, -102),
+  contact: new THREE.Vector3(0, 0.4, -114),
 } as const;
 
 function lerpVec(
@@ -104,7 +96,7 @@ export function sampleCamera(progress: number): {
   };
 }
 
-/** 0–1 progress within a chapter’s camera segment. */
+/** 0–1 progress within a chapter's camera segment. */
 export function chapterLocalProgress(
   progress: number,
   chapter: ChapterId,

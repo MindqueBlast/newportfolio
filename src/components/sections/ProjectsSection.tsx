@@ -1,16 +1,18 @@
 "use client";
 
+import { InteractionHint } from "@/components/observatory/InteractionHint";
 import { OverlaySection } from "@/components/observatory/OverlaySection";
 import { ProjectPanel } from "@/components/observatory/ProjectPanel";
 import { getProject, projects } from "@/content/projects";
 import { useScrollUniverse } from "@/universe/scroll-store";
 import { useMemo, useState } from "react";
 
-export function ConstellationSection() {
+export function ProjectsSection() {
   const {
     selectedProjectId,
     setSelectedProjectId,
     hoveredProjectId,
+    dismissHint,
   } = useScrollUniverse();
   const [listOpen, setListOpen] = useState(false);
 
@@ -23,28 +25,31 @@ export function ConstellationSection() {
     return id ? getProject(id) ?? null : null;
   }, [hoveredProjectId, selectedProjectId]);
 
-  const others = projects.filter((p) => p.tier !== "flagship");
-
   return (
     <OverlaySection
-      id="constellation"
-      eyebrow="Other projects"
-      title="Explore the constellation"
+      id="projects"
+      eyebrow="Projects"
+      title="Things I've built"
       wide
       side="left"
     >
+      <InteractionHint
+        chapter="projects"
+        message="Click glowing nodes to open a project"
+        onDismiss={() => dismissHint("projects")}
+      />
       <p className="mb-3 text-sm text-[color:var(--text-muted)]">
-        Hover and click the glowing nodes in the field — that’s the main way to
-        browse my work.
+        I work across vision, simulation, robotics, and full-stack software.
+        Explore the field — hover to preview, click to read more.
       </p>
       {preview ? (
-        <p className="mb-4 border-l-2 border-[color:var(--instrument)] pl-3 text-sm text-[color:var(--text-secondary)]">
+        <p className="mb-4 border-l-2 border-[color:var(--stellar)] pl-3 text-sm text-[color:var(--text-secondary)]">
           <span className="font-[family-name:var(--font-display)] text-[color:var(--text-primary)]">
             {preview.title}
           </span>
           {" — "}
-          {preview.summary.slice(0, 140)}
-          {preview.summary.length > 140 ? "…" : ""}
+          {preview.summary.slice(0, 150)}
+          {preview.summary.length > 150 ? "…" : ""}
         </p>
       ) : (
         <p className="mb-4 text-sm text-[color:var(--instrument)]">
@@ -57,11 +62,11 @@ export function ConstellationSection() {
         onClick={() => setListOpen((v) => !v)}
         aria-expanded={listOpen}
       >
-        {listOpen ? "Hide list view" : "List view"}
+        {listOpen ? "Hide list" : "List all projects"}
       </button>
       {listOpen ? (
         <ul className="mt-3 flex flex-wrap gap-2">
-          {others.map((p) => (
+          {projects.map((p) => (
             <li key={p.id}>
               <button
                 type="button"

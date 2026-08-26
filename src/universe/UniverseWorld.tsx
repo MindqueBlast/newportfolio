@@ -5,13 +5,15 @@ import { exploring } from "@/content/exploring";
 import { projects } from "@/content/projects";
 import { skillDomains } from "@/content/skills";
 import { timeline } from "@/content/timeline";
+import type { ChapterBeat } from "@/universe/director/chapter-beats";
 import { Float, Stars } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { ZONE_ORIGIN } from "./camera-path";
 import { ColorDust, FresnelOrb, NebulaPlane } from "./materials/Atmosphere";
 import "./materials/shaderMaterials";
-import { ZONE_ORIGIN } from "./camera-path";
+import type { AwardCategory } from "./scroll-store";
 import { useScrollUniverse } from "./scroll-store";
 
 const DOMAIN_ANCHORS: Record<string, [number, number, number]> = {
@@ -22,6 +24,36 @@ const DOMAIN_ANCHORS: Record<string, [number, number, number]> = {
   fullstack: [-2.4, -0.8, 2.0],
   robotics: [-1.2, 1.3, 3.2],
   games: [3.0, -1.0, 2.6],
+};
+
+const SKILL_COLORS: Record<string, string> = {
+  "ai-ml": "#a78bfa",
+  cv: "#5eead4",
+  simulation: "#fbbf24",
+  fullstack: "#e879f9",
+  robotics: "#fb7185",
+  math: "#fde68a",
+};
+
+const AWARD_REGIONS: Record<
+  AwardCategory,
+  { center: THREE.Vector3; color: string; label: string }
+> = {
+  cs: {
+    center: new THREE.Vector3(-2.6, 0.4, 0.2),
+    color: "#c4b5fd",
+    label: "CS",
+  },
+  math: {
+    center: new THREE.Vector3(0, 0.7, -0.4),
+    color: "#fbbf24",
+    label: "Math",
+  },
+  science: {
+    center: new THREE.Vector3(2.6, 0.35, 0.1),
+    color: "#5eead4",
+    label: "Science",
+  },
 };
 
 function journeyMotif(id: string) {
@@ -60,18 +92,18 @@ function PhysicalCore({
   );
 }
 
-function ArrivalZone() {
+function HeroZone() {
   const g = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Group>(null);
   useFrame(({ clock, pointer }) => {
     if (!g.current) return;
     g.current.rotation.y = clock.elapsedTime * 0.07;
-    g.current.position.x = ZONE_ORIGIN.arrival.x + pointer.x * 0.45;
+    g.current.position.x = ZONE_ORIGIN.hero.x + pointer.x * 0.45;
     g.current.position.y = pointer.y * 0.2;
     if (ring.current) ring.current.rotation.z = clock.elapsedTime * 0.15;
   });
   return (
-    <group position={ZONE_ORIGIN.arrival.toArray()}>
+    <group position={ZONE_ORIGIN.hero.toArray()}>
       <NebulaPlane
         position={[-2, 0.5, -4]}
         scale={18}
@@ -157,13 +189,16 @@ function AboutZone() {
 function JourneyArtifact({
   kind,
   on,
+  past,
   color,
 }: {
   kind: string;
   on: boolean;
+  past: boolean;
   color: string;
 }) {
-  const s = on ? 1.45 : 1;
+  const s = on ? 1.45 : past ? 1.05 : 0.82;
+  const emissive = on ? 1 : past ? 0.55 : 0.22;
   if (kind === "code") {
     return (
       <mesh scale={s}>
@@ -171,7 +206,7 @@ function JourneyArtifact({
         <meshPhysicalMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={on ? 1 : 0.35}
+          emissiveIntensity={emissive}
           metalness={0.55}
           roughness={0.25}
           clearcoat={0.6}
@@ -186,7 +221,7 @@ function JourneyArtifact({
         <meshPhysicalMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={on ? 1.1 : 0.4}
+          emissiveIntensity={on ? 1.1 : emissive}
           metalness={0.4}
           roughness={0.2}
           flatShading
@@ -202,7 +237,7 @@ function JourneyArtifact({
           <meshPhysicalMaterial
             color={color}
             emissive={color}
-            emissiveIntensity={on ? 0.9 : 0.35}
+            emissiveIntensity={emissive}
             metalness={0.7}
             roughness={0.3}
           />
@@ -221,7 +256,7 @@ function JourneyArtifact({
         <meshPhysicalMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={on ? 1 : 0.4}
+          emissiveIntensity={emissive}
           flatShading
           metalness={0.35}
           roughness={0.25}
@@ -236,7 +271,7 @@ function JourneyArtifact({
         <meshPhysicalMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={on ? 0.95 : 0.35}
+          emissiveIntensity={emissive}
           metalness={0.55}
           roughness={0.25}
         />
@@ -251,7 +286,7 @@ function JourneyArtifact({
           <meshPhysicalMaterial
             color={color}
             emissive={color}
-            emissiveIntensity={on ? 1 : 0.35}
+            emissiveIntensity={emissive}
           />
         </mesh>
         <FresnelOrb color="#5eead4" radius={0.1} intensity={1.2} />
@@ -264,7 +299,7 @@ function JourneyArtifact({
       <meshPhysicalMaterial
         color={color}
         emissive={color}
-        emissiveIntensity={on ? 0.95 : 0.35}
+        emissiveIntensity={emissive}
         metalness={0.4}
         roughness={0.3}
       />
@@ -273,7 +308,7 @@ function JourneyArtifact({
 }
 
 function JourneyZone() {
-  const { journeyIndex, setJourneyIndex } = useScrollUniverse();
+  const { journeyIndex, setJourneyJump } = useScrollUniverse();
   const ribbon = useRef<THREE.ShaderMaterial>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -327,6 +362,7 @@ function JourneyZone() {
       {timeline.map((wp, i) => {
         const p = points[i];
         const on = i === active;
+        const past = i < active;
         const near = hover === i;
         const color =
           wp.kind === "planned"
@@ -342,7 +378,7 @@ function JourneyZone() {
               visible={false}
               onClick={(e) => {
                 e.stopPropagation();
-                setJourneyIndex(i);
+                setJourneyJump(i);
               }}
               onPointerOver={(e) => {
                 e.stopPropagation();
@@ -360,6 +396,7 @@ function JourneyZone() {
             <JourneyArtifact
               kind={journeyMotif(wp.id)}
               on={on || near}
+              past={past}
               color={color}
             />
             {on || near ? (
@@ -371,10 +408,15 @@ function JourneyZone() {
                   opacity={on ? 0.75 : 0.4}
                 />
               </mesh>
+            ) : past ? (
+              <mesh rotation={[Math.PI / 2, 0, 0]}>
+                <ringGeometry args={[0.3, 0.36, 24]} />
+                <meshBasicMaterial color="#94a3b8" transparent opacity={0.35} />
+              </mesh>
             ) : (
               <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <ringGeometry args={[0.3, 0.34, 24]} />
-                <meshBasicMaterial color="#94a3b8" transparent opacity={0.25} />
+                <ringGeometry args={[0.26, 0.3, 20]} />
+                <meshBasicMaterial color="#475569" transparent opacity={0.18} />
               </mesh>
             )}
           </group>
@@ -384,195 +426,15 @@ function JourneyZone() {
   );
 }
 
-function ResearchZone() {
-  const g = useRef<THREE.Group>(null);
-  useFrame(({ clock }) => {
-    if (g.current) g.current.rotation.y = clock.elapsedTime * 0.25;
-  });
-  return (
-    <group position={ZONE_ORIGIN.research.toArray()}>
-      <group ref={g}>
-        <mesh>
-          <torusKnotGeometry args={[0.6, 0.14, 128, 20]} />
-          <meshPhysicalMaterial
-            color="#a78bfa"
-            emissive="#7c3aed"
-            emissiveIntensity={0.55}
-            metalness={0.55}
-            roughness={0.22}
-            clearcoat={0.7}
-          />
-        </mesh>
-        {[0, 1, 2, 3, 4].map((i) => (
-          <mesh
-            key={i}
-            position={[
-              Math.cos(i * 1.2) * 1.5,
-              Math.sin(i * 0.9) * 0.45,
-              Math.sin(i * 1.2) * 1.5,
-            ]}
-          >
-            <tetrahedronGeometry args={[0.14, 0]} />
-            <meshPhysicalMaterial
-              color="#fde68a"
-              emissive="#fbbf24"
-              emissiveIntensity={0.5}
-              flatShading
-            />
-          </mesh>
-        ))}
-      </group>
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[1.7, 1.82, 64]} />
-        <meshBasicMaterial color="#5eead4" transparent opacity={0.4} />
-      </mesh>
-    </group>
-  );
-}
-
-function FenLensZone() {
-  const g = useRef<THREE.Group>(null);
-  useFrame(({ clock }) => {
-    if (g.current)
-      g.current.rotation.y = Math.sin(clock.elapsedTime * 0.35) * 0.3;
-  });
-  const tiles = useMemo(() => {
-    const out: { x: number; z: number; dark: boolean }[] = [];
-    for (let r = 0; r < 8; r++)
-      for (let f = 0; f < 8; f++)
-        out.push({ x: f - 3.5, z: r - 3.5, dark: (r + f) % 2 === 1 });
-    return out;
-  }, []);
-  return (
-    <group position={ZONE_ORIGIN.fenlens.toArray()}>
-      <group ref={g} rotation={[-0.55, 0.35, 0]}>
-        <mesh position={[0, -0.16, 0]}>
-          <boxGeometry args={[5.2, 0.22, 5.2]} />
-          <meshPhysicalMaterial color="#0f172a" metalness={0.45} roughness={0.4} />
-        </mesh>
-        {tiles.map((t, i) => (
-          <mesh key={i} position={[t.x * 0.55, 0, t.z * 0.55]}>
-            <boxGeometry args={[0.52, 0.1, 0.52]} />
-            <meshPhysicalMaterial
-              color={t.dark ? "#1e293b" : "#f1e7d0"}
-              emissive="#5eead4"
-              emissiveIntensity={0.06}
-              roughness={0.35}
-              metalness={0.15}
-            />
-          </mesh>
-        ))}
-        {[0, 1, 2, 3, 4].map((f) => (
-          <mesh key={f} position={[(f - 3.5) * 0.55, 0.32, -1.925]}>
-            <cylinderGeometry args={[0.14, 0.17, 0.45, 16]} />
-            <meshPhysicalMaterial
-              color="#f8fafc"
-              emissive="#fbbf24"
-              emissiveIntensity={0.3}
-              metalness={0.35}
-              roughness={0.3}
-            />
-          </mesh>
-        ))}
-        <mesh position={[0, 1.2, 0]} rotation={[0.4, 0, 0]}>
-          <coneGeometry args={[1.1, 2.2, 4, 1, true]} />
-          <meshBasicMaterial color="#5eead4" transparent opacity={0.12} wireframe />
-        </mesh>
-      </group>
-    </group>
-  );
-}
-
-function SmartDeskZone() {
-  const ring = useRef<THREE.Group>(null);
-  useFrame(({ clock }) => {
-    if (ring.current) ring.current.rotation.y = clock.elapsedTime * 0.55;
-  });
-  return (
-    <group position={ZONE_ORIGIN.smartDesk.toArray()}>
-      <mesh position={[0, 0.42, 0]}>
-        <boxGeometry args={[2.8, 0.14, 1.45]} />
-        <meshPhysicalMaterial color="#1e293b" metalness={0.55} roughness={0.3} />
-      </mesh>
-      <mesh position={[0, 0.98, -0.42]}>
-        <boxGeometry args={[1.15, 0.72, 0.08]} />
-        <meshPhysicalMaterial
-          color="#020617"
-          emissive="#5eead4"
-          emissiveIntensity={0.7}
-          metalness={0.2}
-          roughness={0.15}
-        />
-      </mesh>
-      <mesh position={[0, 1.42, 0.12]}>
-        <sphereGeometry args={[0.26, 32, 32]} />
-        <meshPhysicalMaterial color="#e7c6a5" roughness={0.5} />
-      </mesh>
-      <group ref={ring} position={[0, 1.42, 0.12]}>
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.55, 0.03, 16, 64]} />
-          <meshBasicMaterial color="#5eead4" transparent opacity={0.8} />
-        </mesh>
-        <mesh rotation={[Math.PI / 2.2, 0.3, 0]}>
-          <torusGeometry args={[0.8, 0.022, 16, 64]} />
-          <meshBasicMaterial color="#fbbf24" transparent opacity={0.6} />
-        </mesh>
-        <mesh rotation={[Math.PI / 2.4, -0.2, 0.15]}>
-          <torusGeometry args={[1.05, 0.018, 12, 64]} />
-          <meshBasicMaterial color="#e879f9" transparent opacity={0.45} />
-        </mesh>
-      </group>
-    </group>
-  );
-}
-
-function NeuroZone() {
-  const fish = useRef<THREE.Group>(null);
-  const agents = useMemo(
-    () =>
-      Array.from({ length: 24 }, () => ({
-        x: (Math.random() - 0.5) * 4.2,
-        y: (Math.random() - 0.5) * 2.2,
-        z: (Math.random() - 0.5) * 4.2,
-        s: 0.45 + Math.random(),
-      })),
-    [],
-  );
-  useFrame(({ clock }) => {
-    if (!fish.current) return;
-    fish.current.children.forEach((child, i) => {
-      const a = agents[i];
-      const t = clock.elapsedTime * a.s + i;
-      child.position.set(
-        a.x + Math.sin(t) * 1.0,
-        a.y + Math.cos(t * 0.7) * 0.5,
-        a.z + Math.sin(t * 0.5) * 0.8,
-      );
-    });
-  });
-  return (
-    <group position={ZONE_ORIGIN.neuro.toArray()}>
-      <PhysicalCore color="#9f1239" emissive="#fb7185" radius={0.48} />
-      <FresnelOrb color="#fb7185" radius={0.62} intensity={1.1} />
-      <group ref={fish}>
-        {agents.map((_, i) => (
-          <mesh key={i}>
-            <sphereGeometry args={[0.1, 12, 12]} />
-            <meshPhysicalMaterial
-              color="#5eead4"
-              emissive="#2dd4bf"
-              emissiveIntensity={0.65}
-              metalness={0.3}
-              roughness={0.3}
-            />
-          </mesh>
-        ))}
-      </group>
-    </group>
-  );
-}
-
-function Motif({ visual, size, hot }: { visual: string; size: number; hot: boolean }) {
+function Motif({
+  visual,
+  size,
+  hot,
+}: {
+  visual: string;
+  size: number;
+  hot: boolean;
+}) {
   const s = hot ? 1.25 : 1;
   if (visual === "lensing") {
     return (
@@ -617,7 +479,12 @@ function Motif({ visual, size, hot }: { visual: string; size: number; hot: boole
   if (visual === "network") {
     return (
       <group scale={s}>
-        {[[0, 0], [1, 0.5], [-0.8, 0.6], [0.3, -0.7]].map(([x, y], i) => (
+        {[
+          [0, 0],
+          [1, 0.5],
+          [-0.8, 0.6],
+          [0.3, -0.7],
+        ].map(([x, y], i) => (
           <mesh key={i} position={[x * size, y * size, 0]}>
             <sphereGeometry args={[size * 0.28, 14, 14]} />
             <meshPhysicalMaterial
@@ -680,13 +547,14 @@ function Motif({ visual, size, hot }: { visual: string; size: number; hot: boole
   );
 }
 
-function ConstellationZone() {
+function ProjectsZone() {
   const g = useRef<THREE.Group>(null);
   const {
     selectedProjectId,
     setSelectedProjectId,
     hoveredProjectId,
     setHoveredProjectId,
+    dismissHint,
   } = useScrollUniverse();
 
   useFrame(({ clock }) => {
@@ -725,7 +593,7 @@ function ConstellationZone() {
   }, [layout]);
 
   return (
-    <group position={ZONE_ORIGIN.constellation.toArray()}>
+    <group position={ZONE_ORIGIN.projects.toArray()}>
       <NebulaPlane
         position={[0, 0, 2]}
         scale={14}
@@ -768,6 +636,7 @@ function ConstellationZone() {
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedProjectId(p.id);
+                  dismissHint("projects");
                 }}
                 onPointerOver={(e) => {
                   e.stopPropagation();
@@ -806,11 +675,13 @@ function ConstellationZone() {
 }
 
 function SkillsZone() {
-  const { selectedSkillDomain, setSelectedSkillDomain } = useScrollUniverse();
+  const { selectedSkillDomain, setSelectedSkillDomain, dismissHint } =
+    useScrollUniverse();
   const g = useRef<THREE.Group>(null);
   useFrame(({ clock }) => {
-    if (g.current) g.current.rotation.y = clock.elapsedTime * 0.12;
+    if (g.current) g.current.rotation.y = clock.elapsedTime * 0.1;
   });
+
   const hubs = useMemo(
     () =>
       skillDomains.map((d, i) => {
@@ -818,17 +689,23 @@ function SkillsZone() {
         return {
           d,
           pos: new THREE.Vector3(
-            Math.cos(a) * 2.7,
-            Math.sin(a * 2) * 0.4,
-            Math.sin(a) * 2.7,
+            Math.cos(a) * 2.9,
+            Math.sin(a * 2) * 0.45,
+            Math.sin(a) * 2.9,
           ),
+          color: SKILL_COLORS[d.id] ?? "#5eead4",
         };
       }),
     [],
   );
+
   return (
     <group position={ZONE_ORIGIN.skills.toArray()} ref={g}>
-      {hubs.map(({ pos }, i) => {
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[3.4, 3.55, 72]} />
+        <meshBasicMaterial color="#a78bfa" transparent opacity={0.22} />
+      </mesh>
+      {hubs.map(({ pos, color }, i) => {
         const next = hubs[(i + 1) % hubs.length].pos;
         const mid = pos.clone().add(next).multiplyScalar(0.5);
         const dir = next.clone().sub(pos);
@@ -839,12 +716,12 @@ function SkillsZone() {
         );
         return (
           <mesh key={`e-${i}`} position={mid} quaternion={quat}>
-            <cylinderGeometry args={[0.015, 0.015, len, 6]} />
-            <meshBasicMaterial color="#a78bfa" transparent opacity={0.3} />
+            <cylinderGeometry args={[0.012, 0.012, len, 6]} />
+            <meshBasicMaterial color={color} transparent opacity={0.28} />
           </mesh>
         );
       })}
-      {hubs.map(({ d, pos }) => {
+      {hubs.map(({ d, pos, color }) => {
         const selected = selectedSkillDomain === d.id;
         return (
           <group key={d.id} position={pos}>
@@ -853,6 +730,7 @@ function SkillsZone() {
               onClick={(e) => {
                 e.stopPropagation();
                 setSelectedSkillDomain(d.id);
+                dismissHint("skills");
               }}
               onPointerOver={(e) => {
                 e.stopPropagation();
@@ -862,126 +740,181 @@ function SkillsZone() {
                 document.body.style.cursor = "auto";
               }}
             >
-              <sphereGeometry args={[0.55, 8, 8]} />
+              <sphereGeometry args={[0.65, 8, 8]} />
               <meshBasicMaterial />
             </mesh>
-            <mesh scale={selected ? 1.4 : 1}>
-              <octahedronGeometry args={[0.3, 0]} />
+            <mesh scale={selected ? 1.5 : 1}>
+              <icosahedronGeometry args={[0.28, 1]} />
               <meshPhysicalMaterial
-                color={selected ? "#fbbf24" : "#5eead4"}
-                emissive={selected ? "#f59e0b" : "#2dd4bf"}
-                emissiveIntensity={selected ? 1 : 0.45}
-                metalness={0.5}
-                roughness={0.25}
+                color={color}
+                emissive={color}
+                emissiveIntensity={selected ? 1.05 : 0.42}
+                metalness={0.45}
+                roughness={0.22}
+                flatShading
               />
             </mesh>
             {selected
-              ? d.items.slice(0, 5).map((item, j) => (
-                  <mesh
-                    key={item}
-                    position={[
-                      Math.cos(j * 1.25) * 0.85,
-                      0.2 + j * 0.04,
-                      Math.sin(j * 1.25) * 0.85,
-                    ]}
-                  >
-                    <boxGeometry args={[0.12, 0.07, 0.12]} />
-                    <meshPhysicalMaterial
-                      color="#fde68a"
-                      emissive="#fbbf24"
-                      emissiveIntensity={0.55}
-                    />
-                  </mesh>
-                ))
+              ? d.items.slice(0, 6).map((item, j) => {
+                  const a = (j / 6) * Math.PI * 2;
+                  const r = 0.95 + (j % 2) * 0.15;
+                  return (
+                    <mesh
+                      key={item}
+                      position={[
+                        Math.cos(a) * r,
+                        0.15 + Math.sin(j) * 0.08,
+                        Math.sin(a) * r,
+                      ]}
+                    >
+                      <sphereGeometry args={[0.09, 10, 10]} />
+                      <meshPhysicalMaterial
+                        color="#fde68a"
+                        emissive="#fbbf24"
+                        emissiveIntensity={0.75}
+                      />
+                    </mesh>
+                  );
+                })
               : null}
           </group>
         );
       })}
-      <FresnelOrb color="#a78bfa" radius={0.4} intensity={1.2} />
+      <FresnelOrb color="#a78bfa" radius={0.45} intensity={1.25} />
     </group>
   );
 }
 
 function AwardsZone() {
-  const { selectedAwardId, setSelectedAwardId, awardFilter } =
-    useScrollUniverse();
-  const list = awards.filter(
-    (a) => awardFilter === "all" || a.domain === awardFilter,
-  );
+  const {
+    selectedAwardId,
+    setSelectedAwardId,
+    awardCategory,
+    setAwardCategory,
+    dismissHint,
+  } = useScrollUniverse();
+
+  const byRegion = useMemo(() => {
+    const map: Record<AwardCategory, typeof awards> = {
+      cs: [],
+      math: [],
+      science: [],
+    };
+    for (const a of awards) {
+      if (a.domain === "cs" || a.domain === "math" || a.domain === "science") {
+        map[a.domain].push(a);
+      }
+    }
+    return map;
+  }, []);
+
   return (
     <group position={ZONE_ORIGIN.awards.toArray()}>
-      {list.map((a, i) => {
-        const row = Math.floor(i / 4);
-        const col = i % 4;
-        const selected = selectedAwardId === a.id;
-        const color =
-          a.domain === "math"
-            ? "#fbbf24"
-            : a.domain === "science"
-              ? "#5eead4"
-              : "#c4b5fd";
+      {(Object.keys(AWARD_REGIONS) as AwardCategory[]).map((cat) => {
+        const region = AWARD_REGIONS[cat];
+        const highlighted = !awardCategory || awardCategory === cat;
         return (
-          <group
-            key={a.id}
-            position={[(col - 1.5) * 1.2, 1.25 - row * 0.95, row * -0.4]}
-          >
+          <group key={cat} position={region.center}>
             <mesh
-              visible={false}
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedAwardId(a.id);
-              }}
+              rotation={[Math.PI / 2.2, 0, 0]}
               onPointerOver={(e) => {
                 e.stopPropagation();
+                setAwardCategory(cat);
                 document.body.style.cursor = "pointer";
               }}
               onPointerOut={() => {
                 document.body.style.cursor = "auto";
               }}
             >
-              <sphereGeometry args={[0.4, 8, 8]} />
-              <meshBasicMaterial />
-            </mesh>
-            <mesh scale={selected ? 1.3 : 1}>
-              <cylinderGeometry args={[0.09, 0.14, 0.55, 10]} />
-              <meshPhysicalMaterial
-                color="#1e293b"
-                emissive={color}
-                emissiveIntensity={selected ? 1 : 0.45}
-                metalness={0.6}
+              <torusGeometry args={[1.35, 0.04, 12, 64]} />
+              <meshBasicMaterial
+                color={region.color}
+                transparent
+                opacity={highlighted ? 0.55 : 0.15}
               />
             </mesh>
-            <mesh position={[0, 0.42, 0]}>
-              <sphereGeometry args={[0.16, 16, 16]} />
-              <meshPhysicalMaterial
-                color={color}
-                emissive={color}
-                emissiveIntensity={0.8}
-                metalness={0.4}
-                roughness={0.2}
-              />
+            <mesh position={[0, 0.9, 0]}>
+              <boxGeometry args={[0.01, 0.01, 0.01]} />
             </mesh>
           </group>
         );
       })}
-      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.25, 0]}>
-        <ringGeometry args={[2.9, 3.05, 72]} />
-        <meshBasicMaterial color="#fde68a" transparent opacity={0.3} />
-      </mesh>
+      {(Object.keys(byRegion) as AwardCategory[]).flatMap((cat) => {
+        const region = AWARD_REGIONS[cat];
+        const list = byRegion[cat];
+        const dimmed = awardCategory !== null && awardCategory !== cat;
+        return list.map((a, i) => {
+          const row = Math.floor(i / 3);
+          const col = i % 3;
+          const selected = selectedAwardId === a.id;
+          const pos = new THREE.Vector3(
+            region.center.x + (col - 1) * 0.55,
+            region.center.y + 0.35 - row * 0.55,
+            region.center.z + row * -0.25,
+          );
+          return (
+            <group key={a.id} position={pos}>
+              <mesh
+                visible={false}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedAwardId(a.id);
+                  setAwardCategory(cat);
+                  dismissHint("awards");
+                }}
+                onPointerOver={(e) => {
+                  e.stopPropagation();
+                  setAwardCategory(cat);
+                  document.body.style.cursor = "pointer";
+                }}
+                onPointerOut={() => {
+                  document.body.style.cursor = "auto";
+                }}
+              >
+                <sphereGeometry args={[0.35, 8, 8]} />
+                <meshBasicMaterial />
+              </mesh>
+              <mesh scale={selected ? 1.35 : dimmed ? 0.85 : 1}>
+                <cylinderGeometry args={[0.08, 0.12, 0.48, 10]} />
+                <meshPhysicalMaterial
+                  color="#1e293b"
+                  emissive={region.color}
+                  emissiveIntensity={
+                    selected ? 1 : dimmed ? 0.15 : 0.45
+                  }
+                  metalness={0.6}
+                  transparent
+                  opacity={dimmed ? 0.45 : 1}
+                />
+              </mesh>
+              <mesh position={[0, 0.38, 0]}>
+                <sphereGeometry args={[0.14, 16, 16]} />
+                <meshPhysicalMaterial
+                  color={region.color}
+                  emissive={region.color}
+                  emissiveIntensity={selected ? 0.95 : dimmed ? 0.2 : 0.65}
+                  metalness={0.4}
+                  roughness={0.2}
+                />
+              </mesh>
+            </group>
+          );
+        });
+      })}
     </group>
   );
 }
 
-function ExploringZone() {
+function FocusZone() {
   const g = useRef<THREE.Group>(null);
-  const { exploringFocusId, setExploringFocusId } = useScrollUniverse();
+  const { focusTopicId, setFocusTopicId, dismissHint } = useScrollUniverse();
   useFrame(({ clock }) => {
     if (g.current) g.current.rotation.y = clock.elapsedTime * 0.16;
   });
   const active = exploring.filter((o) => o.status === "active");
   const planned = exploring.filter((o) => o.status === "planned");
   return (
-    <group position={ZONE_ORIGIN.exploring.toArray()} ref={g}>
+    <group position={ZONE_ORIGIN.focus.toArray()} ref={g}>
       {[1.5, 2.35, 3.2].map((r, i) => (
         <mesh key={r} rotation={[Math.PI / 2.35, 0, i * 0.25]}>
           <torusGeometry args={[r, 0.03, 10, 80]} />
@@ -995,7 +928,7 @@ function ExploringZone() {
       {active.map((orbit, i) => {
         const a = (i / active.length) * Math.PI * 2;
         const r = 1.5 + (i % 3) * 0.4;
-        const on = exploringFocusId === orbit.id;
+        const on = focusTopicId === orbit.id;
         return (
           <group
             key={orbit.id}
@@ -1004,7 +937,8 @@ function ExploringZone() {
             <mesh
               onClick={(e) => {
                 e.stopPropagation();
-                setExploringFocusId(orbit.id);
+                setFocusTopicId(orbit.id);
+                dismissHint("focus");
               }}
               onPointerOver={(e) => {
                 e.stopPropagation();
@@ -1027,17 +961,30 @@ function ExploringZone() {
       })}
       {planned.map((orbit, i) => {
         const a = Math.PI * 0.4 + i;
+        const on = focusTopicId === orbit.id;
         return (
           <mesh
             key={orbit.id}
             position={[Math.cos(a) * 3.0, 0.15, Math.sin(a) * 3.0]}
             onClick={(e) => {
               e.stopPropagation();
-              setExploringFocusId(orbit.id);
+              setFocusTopicId(orbit.id);
+              dismissHint("focus");
             }}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              document.body.style.cursor = "pointer";
+            }}
+            onPointerOut={() => {
+              document.body.style.cursor = "auto";
+            }}
+            scale={on ? 1.25 : 1}
           >
             <sphereGeometry args={[0.12, 12, 12]} />
-            <meshBasicMaterial color="#64748b" wireframe />
+            <meshBasicMaterial
+              color={on ? "#fbbf24" : "#64748b"}
+              wireframe
+            />
           </mesh>
         );
       })}
@@ -1129,31 +1076,50 @@ function ContactZone() {
   );
 }
 
-export function UniverseWorld({ dense }: { dense: boolean }) {
-  const { progress, activeChapter } = useScrollUniverse();
-  const fogFar = 38 + progress * 32;
-  const fogNear = 7;
-  const fogColor =
-    activeChapter === "arrival" || activeChapter === "about"
-      ? "#050814"
-      : activeChapter === "journey" || activeChapter === "research"
-        ? "#08061a"
-        : activeChapter === "constellation" || activeChapter === "skills"
-          ? "#06101c"
-          : "#050814";
+export function UniverseWorld({
+  dense,
+  beat,
+}: {
+  dense: boolean;
+  beat: ChapterBeat;
+}) {
+  const { progress } = useScrollUniverse();
+  const fogFar = 38 + progress * 32 + beat.fogFarBoost;
+  const fogNear = beat.fogNear;
+  const fogColor = beat.fogColor;
 
   return (
     <>
       <color attach="background" args={[fogColor]} />
       <fog attach="fog" args={[fogColor, fogNear, fogFar]} />
-      <ambientLight intensity={0.2} />
+      <ambientLight intensity={beat.ambient} />
       <hemisphereLight args={["#a78bfa", "#1a1020", 0.45]} />
       <directionalLight position={[8, 12, 5]} intensity={1.15} color="#fde68a" />
       <directionalLight position={[-6, 4, -40]} intensity={0.45} color="#5eead4" />
-      <pointLight position={ZONE_ORIGIN.arrival.toArray()} intensity={1.4} color="#e879f9" distance={24} />
-      <pointLight position={ZONE_ORIGIN.constellation.toArray()} intensity={1.2} color="#fbbf24" distance={22} />
-      <pointLight position={ZONE_ORIGIN.journey.toArray()} intensity={1.0} color="#67e8f9" distance={20} />
-      <pointLight position={ZONE_ORIGIN.contact.toArray()} intensity={1.0} color="#5eead4" distance={16} />
+      <pointLight
+        position={ZONE_ORIGIN.hero.toArray()}
+        intensity={1.4}
+        color={beat.accent}
+        distance={24}
+      />
+      <pointLight
+        position={ZONE_ORIGIN.projects.toArray()}
+        intensity={1.2}
+        color="#fbbf24"
+        distance={22}
+      />
+      <pointLight
+        position={ZONE_ORIGIN.journey.toArray()}
+        intensity={1.0}
+        color="#67e8f9"
+        distance={20}
+      />
+      <pointLight
+        position={ZONE_ORIGIN.contact.toArray()}
+        intensity={1.0}
+        color="#5eead4"
+        distance={16}
+      />
       <Stars
         radius={150}
         depth={100}
@@ -1181,17 +1147,13 @@ export function UniverseWorld({ dense }: { dense: boolean }) {
         colorB="#fbbf24"
         colorC="#5eead4"
       />
-      <ArrivalZone />
+      <HeroZone />
       <AboutZone />
       <JourneyZone />
-      <ResearchZone />
-      <FenLensZone />
-      <SmartDeskZone />
-      <NeuroZone />
-      <ConstellationZone />
+      <ProjectsZone />
       <SkillsZone />
       <AwardsZone />
-      <ExploringZone />
+      <FocusZone />
       <ChessZone />
       <ContactZone />
     </>

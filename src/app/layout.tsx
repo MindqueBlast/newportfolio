@@ -16,9 +16,9 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Aaditya Sahu — Observatory",
+  title: "Aaditya Sahu — Portfolio",
   description:
-    "Interactive portfolio of systems across computer vision, simulation, robotics, mathematics, and software — by Aaditya Sahu.",
+    "I build ambitious tools across computer vision, simulation, robotics, mathematics, and software.",
   authors: [{ name: "Aaditya Sahu" }],
   icons: {
     icon: [
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "Aaditya Sahu — Observatory",
+    title: "Aaditya Sahu — Portfolio",
     description:
-      "Interactive space-themed portfolio: FenLens, Smart Desk, Neuroevolution, and more.",
+      "Cinematic interactive portfolio — projects, journey, skills, and research by Aaditya Sahu.",
     type: "website",
   },
 };

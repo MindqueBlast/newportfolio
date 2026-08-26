@@ -1,69 +1,72 @@
 "use client";
 
+import { InteractionHint } from "@/components/observatory/InteractionHint";
 import { OverlaySection } from "@/components/observatory/OverlaySection";
 import { awards } from "@/content/awards";
+import type { AwardCategory } from "@/universe/scroll-store";
 import { useScrollUniverse } from "@/universe/scroll-store";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo } from "react";
 
+const CATEGORY_LABEL: Record<AwardCategory, string> = {
+  cs: "Computer Science",
+  math: "Mathematics",
+  science: "Science",
+};
+
 export function AwardsSection() {
   const {
-    awardFilter,
-    setAwardFilter,
+    awardCategory,
     selectedAwardId,
     setSelectedAwardId,
+    dismissHint,
   } = useScrollUniverse();
 
   const filtered = useMemo(
     () =>
-      awards.filter(
-        (a) => awardFilter === "all" || a.domain === awardFilter,
-      ),
-    [awardFilter],
+      awardCategory
+        ? awards.filter((a) => a.domain === awardCategory)
+        : awards,
+    [awardCategory],
   );
 
   const selected =
-    filtered.find((a) => a.id === selectedAwardId) ?? filtered[0] ?? null;
+    filtered.find((a) => a.id === selectedAwardId) ??
+    awards.find((a) => a.id === selectedAwardId) ??
+    filtered[0] ??
+    null;
 
   return (
     <OverlaySection
       id="awards"
       eyebrow="Awards & competitions"
-      title="What I’ve competed in"
+      title="What I've competed in"
       wide
     >
-      <p className="mb-4 text-sm text-[color:var(--text-muted)]">
-        Click a glowing record in the field, or filter below.
-      </p>
-      <div className="mb-4 flex flex-wrap gap-2">
-        {(["all", "cs", "math", "science"] as const).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => {
-              setAwardFilter(f);
-              setSelectedAwardId(null);
-            }}
-            className={`border px-3 py-1.5 text-[11px] uppercase tracking-wider ${
-              awardFilter === f
-                ? "border-[color:var(--instrument)] text-[color:var(--instrument)]"
-                : "border-white/10 text-[color:var(--text-muted)]"
-            }`}
-          >
-            {f === "cs" ? "CS" : f}
-          </button>
-        ))}
-      </div>
-      <ul className="mb-4 flex flex-wrap gap-2">
+      <InteractionHint
+        chapter="awards"
+        message="Explore the three regions in the field — CS, Math, Science"
+        onDismiss={() => dismissHint("awards")}
+      />
+      {awardCategory ? (
+        <p className="mb-3 text-sm text-[color:var(--instrument)]">
+          Viewing: {CATEGORY_LABEL[awardCategory]}
+        </p>
+      ) : (
+        <p className="mb-3 text-sm text-[color:var(--text-muted)]">
+          Hover a region in the field to filter, then click a record for details.
+        </p>
+      )}
+      <ul className="mb-4 flex flex-wrap gap-2" aria-label="Award records">
         {filtered.map((a) => (
           <li key={a.id}>
             <button
               type="button"
               onClick={() => setSelectedAwardId(a.id)}
-              className={`border px-2.5 py-1 text-left text-xs ${
+              className={`border px-2.5 py-1 text-left text-xs transition ${
                 selected?.id === a.id
                   ? "border-[color:var(--stellar)] text-[color:var(--text-primary)]"
-                  : "border-white/10 text-[color:var(--text-muted)]"
+                  : "border-white/10 text-[color:var(--text-muted)] hover:border-white/30"
               }`}
             >
               {a.badge}
@@ -78,7 +81,6 @@ export function AwardsSection() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
             className="border-t border-[color:var(--line)] pt-4"
           >
             <p className="text-[10px] uppercase tracking-[0.18em] text-[color:var(--stellar)]">

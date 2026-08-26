@@ -23,7 +23,7 @@ export function BootOverlay() {
       aria-hidden
     >
       <p className="font-[family-name:var(--font-display)] text-sm uppercase tracking-[0.32em] text-[color:var(--instrument)]">
-        Aligning observatory
+        Loading
       </p>
     </div>
   );

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export type SceneId = ChapterId | "signal";
 
 export function useActiveScene(sectionIds: string[]): string {
-  const [active, setActive] = useState(sectionIds[0] ?? "arrival");
+  const [active, setActive] = useState(sectionIds[0] ?? "hero");
 
   useEffect(() => {
     const elements = sectionIds
